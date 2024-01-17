@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.edu.Shore.dao.shore.StationMapper">
+    <resultMap id="StationResultMap" type="nnu.edu.Shore.pojo.Station">
+        <id property="station_id" column="station_id"/>
+        <result property="begin_time" column="begin_time"/>
+        <result property="end_time" column="end_time"/>
+        <result property="operate_time" column="operate_time"/>
+        <result property="operator" column="operator"/>
+        <result property="data_v" column="data_v"/>
+        <result property="data_v_explain" column="data_v_explain"/>
+    </resultMap>
+
+    <insert id="insertStation" parameterType="nnu.edu.Shore.pojo.Station" useGeneratedKeys="true" keyProperty="station_id">
+        INSERT INTO station (begin_time, end_time, operate_time, operator, data_v, data_v_explain)
+        VALUES (#{begin_time}, #{end_time}, #{operate_time}, #{operator}, #{data_v}, #{data_v_explain})
+    </insert>
+
+    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">
+        UPDATE station
+        SET
+            begin_time = #{begin_time},
+            end_time = #{end_time},
+            operate_time = #{operate_time},
+            operator = #{operator},
+            data_v = #{data_v},
+            data_v_explain = #{data_v_explain}
+        WHERE
+            station_id = #{station_id}
+    </update>
+
+    <delete id="deleteStation" parameterType="String">
+        DELETE FROM station
+        WHERE station_id = #{stationId}
+    </delete>
+
+    <select id="getStations"  resultType="nnu.edu.Shore.pojo.Station">
+        select * from station
+    </select>
+</mapper>

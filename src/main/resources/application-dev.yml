@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    shore:
+      jdbc-url: jdbc:postgresql://localhost:5432/shore?stringtype=unspecified
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: 123
+
+python:
+  python
+DataProcess:
+  D:/1study/Work/2023_12_22_Storm/Data/DataProcess/
+DataProcessLog:
+  D:/1study/Work/2023_12_22_Storm/Data/DataProcess/logfile.log

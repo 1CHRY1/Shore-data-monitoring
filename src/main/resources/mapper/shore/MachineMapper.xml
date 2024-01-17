@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.edu.Shore.dao.shore.MachineMapper">
+
+    <insert id="insertMachine" parameterType="nnu.edu.Shore.pojo.Machine" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO machine (station_id,machine_id,machine_id_nnu,machine_name,begin_time,end_time,type,longitude,latitude,elevation,in_time,operate_time,data_v,in_operator,notes)
+        VALUES (#{idGroup.station_id},#{idGroup.machine_id},#{idGroup.machine_id_nnu},#{machine_name},#{begin_time},#{end_time},#{type},
+                #{longitude},#{latitude},#{elevation},#{in_time},#{operate_time},#{data_v},#{in_operator},#{notes})
+    </insert>
+
+<!--    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">-->
+<!--        UPDATE station-->
+<!--        SET-->
+<!--            begin_time = #{begin_time},-->
+<!--            end_time = #{end_time},-->
+<!--            operate_time = #{operate_time},-->
+<!--            operator = #{operator},-->
+<!--            data_v = #{data_v},-->
+<!--            data_v_explain = #{data_v_explain}-->
+<!--        WHERE-->
+<!--            station_id = #{station_id}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteStation" parameterType="String">-->
+<!--        DELETE FROM station-->
+<!--        WHERE station_id = #{stationId}-->
+<!--    </delete>-->
+
+<!--    <select id="getStations"  resultType="nnu.edu.Shore.pojo.Station">-->
+<!--        select * from station-->
+<!--    </select>-->
+</mapper>

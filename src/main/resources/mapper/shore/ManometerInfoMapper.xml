@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.edu.Shore.dao.shore.ManometerInfoMapper">
+
+    <insert id="insertManometerInfo" parameterType="nnu.edu.Shore.pojo.ManometerInfo" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO manometer_info (station_id, machine_id, machine_id_nnu, point_num, point1_depth, point2_depth, point3_depth, point4_depth,
+                                    point5_depth, point6_depth, in_time, data_v, in_operator, notes)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{point_num}, #{point1_depth}, #{point2_depth},
+                #{point3_depth}, #{point4_depth}, #{point5_depth}, #{point6_depth}, #{in_time}, #{data_v}, #{in_operator}, #{notes})
+    </insert>
+
+</mapper>

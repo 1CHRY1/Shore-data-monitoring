@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.edu.Shore.dao.shore.GNSSRecordMapper">
+
+    <insert id="insertGNSSRecord" parameterType="nnu.edu.Shore.pojo.GNSSRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO gnss_record (station_id, machine_id, machine_id_nnu, measure_time, x_move, y_move, z_move, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{x_move}, #{y_move}, #{z_move}, #{in_time})
+    </insert>
+
+</mapper>

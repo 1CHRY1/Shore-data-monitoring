@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.edu.Shore.dao.shore.InclinometerRecordMapper">
+
+    <insert id="insertInclinometerRecord" parameterType="nnu.edu.Shore.pojo.InclinometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO inclinometer_record (station_id, machine_id, machine_id_nnu, measure_time,x_move1, y_move1, x_move2, y_move2,
+                                         x_move3, y_move3, x_move4, y_move4, x_move5, y_move5, x_move6, y_move6, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{x_move1}, #{y_move1}, #{x_move2},
+                #{y_move2}, #{x_move3}, #{y_move3}, #{x_move4}, #{y_move4}, #{x_move5}, #{y_move5}, #{x_move6}, #{y_move6}, #{in_time})
+    </insert>
+
+</mapper>
