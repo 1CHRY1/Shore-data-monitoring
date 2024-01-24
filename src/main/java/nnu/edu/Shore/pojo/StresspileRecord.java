@@ -2,6 +2,7 @@ package nnu.edu.Shore.pojo;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
@@ -21,11 +22,13 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class StresspileRecord {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Embeddable
+    @Builder
     public static class StresspileRecordIdGroup implements Serializable {
         @NotNull
         String station_id; // 站码
@@ -53,7 +56,7 @@ public class StresspileRecord {
     Double horizontal4; // 水平应力角度4
     Double horizontal_stress4; // 水平应力大小4
     Double vertical_stress4; // 垂向应力大小4
-    Double horizonta15; // 水平应力角度5
+    Double horizontal5; // 水平应力角度5
     Double horizontal_stress5; // 水平应力大小5
     Double vertical_stress5; // 垂向应力大小5
     Double horizontal6; // 水平应力角度6

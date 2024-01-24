@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.GNSSRecord;
@@ -28,8 +29,8 @@ public class InclinometerInfoController {
     InclinometerInfoService inclinometerInfoService;
 
     @RequestMapping(value="/insertInclinometerInfo", method = RequestMethod.POST)
-    public JsonResult insertInclinometerInfo(@RequestBody InclinometerInfo inclinometerInfo){
+    public JsonResult insertInclinometerInfo(@RequestBody JSONObject jsonObject){
         // 插入测斜仪设备信息数据
-        return ResultUtils.success(inclinometerInfoService.insertInclinometerInfo(inclinometerInfo));
+        return ResultUtils.success(inclinometerInfoService.insertInclinometerInfo(jsonObject));
     }
 }

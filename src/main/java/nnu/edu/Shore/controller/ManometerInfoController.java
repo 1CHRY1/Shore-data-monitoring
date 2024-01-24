@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.GNSSRecord;
@@ -28,8 +29,8 @@ public class ManometerInfoController {
     ManometerInfoService manometerInfoService;
 
     @RequestMapping(value="/insertManometerInfo", method = RequestMethod.POST)
-    public JsonResult insertManometerInfo(@RequestBody ManometerInfo manometerInfo){
+    public JsonResult insertManometerInfo(@RequestBody JSONObject jsonObject){
         // 插入压力计设备信息数据
-        return ResultUtils.success(manometerInfoService.insertManometerInfo(manometerInfo));
+        return ResultUtils.success(manometerInfoService.insertManometerInfo(jsonObject));
     }
 }

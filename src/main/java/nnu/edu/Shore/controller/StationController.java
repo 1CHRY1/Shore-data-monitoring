@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.Station;
@@ -25,9 +26,9 @@ public class StationController {
     StationService stationService;
 
     @RequestMapping(value="/insertStation", method = RequestMethod.POST)
-    public JsonResult insertStation(@RequestBody Station station){
+    public JsonResult insertStation(@RequestBody JSONObject jsonObject){
         // 插入测站信息数据
-        return ResultUtils.success(stationService.insertStation(station));
+        return ResultUtils.success(stationService.insertStation(jsonObject));
     }
 
     @RequestMapping(value="/updateStation", method = RequestMethod.PUT)

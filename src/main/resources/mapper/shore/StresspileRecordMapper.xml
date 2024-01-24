@@ -5,12 +5,12 @@
     <insert id="insertStresspileRecord" parameterType="nnu.edu.Shore.pojo.StresspileRecord" useGeneratedKeys="true" keyProperty="idGroup">
         INSERT INTO stresspile_record (station_id, machine_id, machine_id_nnu, measure_time, horizontal1, horizontal_stress1, vertical_stress1,
                                        horizontal2, horizontal_stress2, vertical_stress2, horizontal3, horizontal_stress3, vertical_stress3,
-                                       horizontal4, horizontal_stress4, vertical_stress4, horizonta15, horizontal_stress5, vertical_stress5,
+                                       horizontal4, horizontal_stress4, vertical_stress4, horizontal5, horizontal_stress5, vertical_stress5,
                                        horizontal6, horizontal_stress6, vertical_stress6, in_time)
         VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time},
                 #{horizontal1}, #{horizontal_stress1}, #{vertical_stress1}, #{horizontal2}, #{horizontal_stress2}, #{vertical_stress2},
                 #{horizontal3}, #{horizontal_stress3}, #{vertical_stress3}, #{horizontal4}, #{horizontal_stress4}, #{vertical_stress4},
-                #{horizonta15}, #{horizontal_stress5}, #{vertical_stress5}, #{horizontal6}, #{horizontal_stress6}, #{vertical_stress6},
+                #{horizontal5}, #{horizontal_stress5}, #{vertical_stress5}, #{horizontal6}, #{horizontal_stress6}, #{vertical_stress6},
                 #{in_time})
     </insert>
 

@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.pojo.InclinometerInfo;
 import nnu.edu.Shore.pojo.Machine;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description:
  */
 public interface InclinometerInfoService {
-    String insertInclinometerInfo(InclinometerInfo inclinometerInfo);
+    String insertInclinometerInfo(JSONObject jsonObject);
 
     String updateInclinometerInfo(InclinometerInfo inclinometerInfo);
 
