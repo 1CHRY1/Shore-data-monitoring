@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.Machine;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description:
  */
 public interface GNSSRecordService {
-    String insertGNSSRecord(GNSSRecord gnssRecord);
+    String insertGNSSRecord(JSONObject jsonObject);
 
     String updateGNSSRecord(GNSSRecord gnssRecord);
 

@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service.impl;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.dao.shore.StationMapper;
 import nnu.edu.Shore.pojo.Station;
 import nnu.edu.Shore.service.StationService;
@@ -21,8 +22,22 @@ public class StationServiceImpl implements StationService {
     @Autowired
     StationMapper stationMapper;
 
+    private Station dataProcess(JSONObject jsonObject){
+        Station station = Station.builder()
+                .station_id(jsonObject.getString("station_id"))
+                .begin_time(jsonObject.getString("begin_time"))
+                .end_time(jsonObject.getString("end_time"))
+                .operate_time(jsonObject.getString("operate_time"))
+                .operator(jsonObject.getString("operator"))
+                .data_v(Integer.parseInt(jsonObject.getString("data_v")))
+                .data_v_explain(jsonObject.getString("data_v_explain"))
+                .build();
+        return station;
+    }
+
     @Override
-    public String insertStation(Station station){
+    public String insertStation(JSONObject jsonObject){
+        Station station = dataProcess(jsonObject);
         stationMapper.insertStation(station);
         return station.getStation_id();
     }

@@ -2,6 +2,7 @@ package nnu.edu.Shore.pojo;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
@@ -16,6 +17,7 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Station {
     @NotNull
     String station_id; // 站码

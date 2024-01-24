@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.pojo.Station;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @Description:
  */
 public interface StationService {
-    String insertStation(Station station);
+    String insertStation(JSONObject jsonObject);
 
     String updateStation(Station station);
 

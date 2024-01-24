@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.Machine;
@@ -27,8 +28,8 @@ public class MachineController {
     MachineService machineService;
 
     @RequestMapping(value="/insertMachine", method = RequestMethod.POST)
-    public JsonResult insertMachine(@RequestBody Machine machine){
+    public JsonResult insertMachine(@RequestBody JSONObject jsonObject){
         // 插入设备信息数据
-        return ResultUtils.success(machineService.insertMachine(machine));
+        return ResultUtils.success(machineService.insertMachine(jsonObject));
     }
 }

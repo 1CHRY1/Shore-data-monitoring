@@ -2,6 +2,7 @@ package nnu.edu.Shore.pojo;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
@@ -21,11 +22,13 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class InclinometerRecord {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Embeddable
+    @Builder
     public static class InclinometerRecordIdGroup implements Serializable {
         @NotNull
         String station_id; // 站码

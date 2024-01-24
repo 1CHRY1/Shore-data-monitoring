@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.GNSSRecord;
@@ -27,8 +28,8 @@ public class GNSSRecordController {
     GNSSRecordService gnssRecordService;
 
     @RequestMapping(value="/insertGNSSRecord", method = RequestMethod.POST)
-    public JsonResult insertGNSSRecord(@RequestBody GNSSRecord gnssRecord){
+    public JsonResult insertGNSSRecord(@RequestBody JSONObject jsonObject){
         // 插入GNSS设备记录数据
-        return ResultUtils.success(gnssRecordService.insertGNSSRecord(gnssRecord));
+        return ResultUtils.success(gnssRecordService.insertGNSSRecord(jsonObject));
     }
 }

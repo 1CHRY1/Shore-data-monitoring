@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.StresspileInfo;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description:
  */
 public interface StresspileInfoService {
-    String insertStresspileInfo(StresspileInfo stresspileInfo);
+    String insertStresspileInfo(JSONObject jsonObject);
 
     String updateStresspileInfo(StresspileInfo stresspileInfo);
 

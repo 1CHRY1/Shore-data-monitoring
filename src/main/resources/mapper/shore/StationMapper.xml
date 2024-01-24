@@ -12,8 +12,8 @@
     </resultMap>
 
     <insert id="insertStation" parameterType="nnu.edu.Shore.pojo.Station" useGeneratedKeys="true" keyProperty="station_id">
-        INSERT INTO station (begin_time, end_time, operate_time, operator, data_v, data_v_explain)
-        VALUES (#{begin_time}, #{end_time}, #{operate_time}, #{operator}, #{data_v}, #{data_v_explain})
+        INSERT INTO station (station_id, begin_time, end_time, operate_time, operator, data_v, data_v_explain)
+        VALUES (#{station_id}, #{begin_time}, #{end_time}, #{operate_time}, #{operator}, #{data_v}, #{data_v_explain})
     </insert>
 
     <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">

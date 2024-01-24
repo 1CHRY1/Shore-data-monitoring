@@ -1,5 +1,6 @@
 package nnu.edu.Shore.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.common.result.ResultUtils;
 import nnu.edu.Shore.pojo.StresspileInfo;
@@ -27,8 +28,8 @@ public class StresspileRecordController {
     StresspileRecordService stresspileRecordService;
 
     @RequestMapping(value="/insertStresspileRecord", method = RequestMethod.POST)
-    public JsonResult insertStresspileRecord(@RequestBody StresspileRecord stresspileRecord){
+    public JsonResult insertStresspileRecord(@RequestBody JSONObject jsonObject){
         // 插入应力桩设备信记录数据
-        return ResultUtils.success(stresspileRecordService.insertStresspileRecord(stresspileRecord));
+        return ResultUtils.success(stresspileRecordService.insertStresspileRecord(jsonObject));
     }
 }

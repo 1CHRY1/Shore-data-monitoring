@@ -1,5 +1,6 @@
 package nnu.edu.Shore.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.ManometerInfo;
 import nnu.edu.Shore.pojo.ManometerRecord;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 public interface ManometerRecordService {
-    String insertManometerRecord(ManometerRecord manometerRecord);
+    String insertManometerRecord(JSONObject jsonObject);
 
     String updateManometerRecord(ManometerRecord manometerRecord);
 

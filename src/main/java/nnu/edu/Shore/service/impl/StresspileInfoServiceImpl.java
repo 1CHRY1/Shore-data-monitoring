@@ -1,11 +1,11 @@
 package nnu.edu.Shore.service.impl;
 
 import com.alibaba.fastjson2.JSONObject;
-import nnu.edu.Shore.dao.shore.ManometerInfoMapper;
+import nnu.edu.Shore.dao.shore.StresspileInfoMapper;
 import nnu.edu.Shore.pojo.Machine;
-import nnu.edu.Shore.pojo.ManometerInfo;
-import nnu.edu.Shore.pojo.ManometerInfo.ManometerInfoIdGroup;
-import nnu.edu.Shore.service.ManometerInfoService;
+import nnu.edu.Shore.pojo.StresspileInfo;
+import nnu.edu.Shore.pojo.StresspileInfo.StresspileInfoIdGroup;
+import nnu.edu.Shore.service.StresspileInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +15,19 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  *
  * @Author: Chry
- * @Date: 2024/1/17 11:36
+ * @Date: 2024/1/17 12:01
  * @Description:
  */
 
 @Service
-public class ManometerInfoServiceImpl implements ManometerInfoService {
+public class StresspileInfoServiceImpl implements StresspileInfoService {
 
     @Autowired
-    ManometerInfoMapper manometerInfoMapper;
+    StresspileInfoMapper stresspileInfoMapper;
 
-    private ManometerInfo dataProcess(JSONObject jsonObject){
-        ManometerInfo manometerInfo = ManometerInfo.builder()
-                .idGroup(ManometerInfoIdGroup.builder()
+    private StresspileInfo dataProcess(JSONObject jsonObject){
+        StresspileInfo stresspileInfo = StresspileInfo.builder()
+                .idGroup(StresspileInfoIdGroup.builder()
                         .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
                         .machine_id(jsonObject.getJSONObject("idGroup").getString("machine_id"))
                         .machine_id_nnu(jsonObject.getJSONObject("idGroup").getString("machine_id_nnu"))
@@ -44,30 +44,28 @@ public class ManometerInfoServiceImpl implements ManometerInfoService {
                 .in_operator(jsonObject.getString("in_operator"))
                 .notes(jsonObject.getString("notes"))
                 .build();
-        return manometerInfo;
-    }
-
-
-
-    @Override
-    public String insertManometerInfo(JSONObject jsonObject) {
-        ManometerInfo manometerInfo = dataProcess(jsonObject);
-        manometerInfoMapper.insertManometerInfo(manometerInfo);
-        return manometerInfo.getIdGroup().getMachine_id();
+        return stresspileInfo;
     }
 
     @Override
-    public String updateManometerInfo(ManometerInfo manometerInfo) {
+    public String insertStresspileInfo(JSONObject jsonObject) {
+        StresspileInfo stresspileInfo = dataProcess(jsonObject);
+        stresspileInfoMapper.insertStresspileInfo(stresspileInfo);
+        return stresspileInfo.getIdGroup().getMachine_id();
+    }
+
+    @Override
+    public String updateStresspileInfo(StresspileInfo stresspileInfo) {
         return null;
     }
 
     @Override
-    public String deleteManometerInfo(String machine_id_nnu) {
+    public String deleteStresspileInfo(String machine_id_nnu) {
         return null;
     }
 
     @Override
-    public List<Machine> getManometerInfos() {
+    public List<Machine> getStresspileInfos() {
         return null;
     }
 }
