@@ -25,25 +25,25 @@ public class StationController {
     @Autowired
     StationService stationService;
 
-    @RequestMapping(value="/insertStation", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertStation(@RequestBody JSONObject jsonObject){
         // 插入测站信息数据
         return ResultUtils.success(stationService.insertStation(jsonObject));
     }
 
-    @RequestMapping(value="/updateStation", method = RequestMethod.PUT)
+    @RequestMapping(value="/update", method = RequestMethod.PUT)
     public JsonResult updateStation(@RequestBody Station station){
         // 更新测站信息数据
         return ResultUtils.success(stationService.updateStation(station));
     }
 
-    @RequestMapping(value = "/deleteStation", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public JsonResult deleteStation(@RequestBody String station_id){
         // 删除测站信息数据
         return ResultUtils.success(stationService.deleteStation(station_id));
     }
 
-    @RequestMapping(value = "/getStations",method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
     public JsonResult getStations(){
         // 获取所有站点信息数据
         return ResultUtils.success(stationService.getStations());

@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping("/InclinometerRecord")
+@RequestMapping("api/v1/inclinometer/record")
 public class inclinometerRecordController {
 
     @Autowired
     InclinometerRecordService inclinometerRecordService;
 
-    @RequestMapping(value="/insertInclinometerRecord", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertInclinometerRecord(@RequestBody JSONObject jsonObject){
         // 插入测斜仪设备记录数据
         return ResultUtils.success(inclinometerRecordService.insertInclinometerRecord(jsonObject));

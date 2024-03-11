@@ -9,7 +9,11 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 server:
+<<<<<<< HEAD
   port: 9988
+=======
+  port: 9989
+>>>>>>> 0702b42a43b630e0501b3f0f9891176eb06e4759
 
 mybatis:
   configuration:

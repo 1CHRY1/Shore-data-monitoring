@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/ManometerRecord")
+@RequestMapping("api/v1/Manometer/record")
 public class ManometerRecordController {
     @Autowired
     ManometerRecordService manometerRecordService;
 
-    @RequestMapping(value="/insertManometerRecord", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertManometerRecord(@RequestBody JSONObject jsonObject){
         // 插入压力计设备记录数据
         return ResultUtils.success(manometerRecordService.insertManometerRecord(jsonObject));

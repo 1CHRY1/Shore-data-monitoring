@@ -56,7 +56,6 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         if (pressure5 != null) { manometerRecord.setPressure5(pressure5.doubleValue()); } else { manometerRecord.setPressure5(null);}
         if (pressure6 != null) { manometerRecord.setPressure6(pressure6.doubleValue()); } else { manometerRecord.setPressure6(null);}
         manometerRecord.setIn_time(in_time);
-
         return manometerRecord;
     }
 

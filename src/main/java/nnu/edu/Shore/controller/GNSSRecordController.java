@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/GNSSRecord")
+@RequestMapping("api/v1/gnss/record")
 public class GNSSRecordController {
 
     @Autowired
     GNSSRecordService gnssRecordService;
 
-    @RequestMapping(value="/insertGNSSRecord", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertGNSSRecord(@RequestBody JSONObject jsonObject){
         // 插入GNSS设备记录数据
         return ResultUtils.success(gnssRecordService.insertGNSSRecord(jsonObject));

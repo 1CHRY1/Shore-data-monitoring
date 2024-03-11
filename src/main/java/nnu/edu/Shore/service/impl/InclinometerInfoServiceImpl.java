@@ -62,6 +62,7 @@ public class InclinometerInfoServiceImpl implements InclinometerInfoService {
         inclinometerInfo.setData_v(data_v);
         inclinometerInfo.setIn_operator(in_operator);
         inclinometerInfo.setNotes(notes);
+
         return inclinometerInfo;
     }
 

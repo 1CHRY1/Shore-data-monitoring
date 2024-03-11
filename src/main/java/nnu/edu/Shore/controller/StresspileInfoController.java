@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/StresspileInfo")
+@RequestMapping("api/v1/stresspile/info")
 public class StresspileInfoController {
     @Autowired
     StresspileInfoService stresspileInfoService;
 
-    @RequestMapping(value="/insertStresspileInfo", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertStresspileInfo(@RequestBody JSONObject jsonObject){
         // 插入应力桩备信息数据
         return ResultUtils.success(stresspileInfoService.insertStresspileInfo(jsonObject));

@@ -1,6 +1,9 @@
 package nnu.edu.Shore.service.impl;
 
+<<<<<<< HEAD
 import com.alibaba.fastjson2.JSONException;
+=======
+>>>>>>> 0702b42a43b630e0501b3f0f9891176eb06e4759
 import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.dao.shore.MachineMapper;
 import nnu.edu.Shore.pojo.Machine;
@@ -62,7 +65,6 @@ public class MachineServiceImpl implements MachineService {
         machine.setData_v(data_v);
         machine.setIn_operator(in_operator);
         machine.setNotes(notes);
-
         machine.Onlyid();
         return machine;
     }

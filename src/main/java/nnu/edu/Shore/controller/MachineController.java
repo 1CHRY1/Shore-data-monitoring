@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/Machine")
+@RequestMapping("api/v1/machine/info")
 public class MachineController {
     @Autowired
     MachineService machineService;
 
-    @RequestMapping(value="/insertMachine", method = RequestMethod.POST)
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
     public JsonResult insertMachine(@RequestBody JSONObject jsonObject){
         // 插入设备信息数据
         return ResultUtils.success(machineService.insertMachine(jsonObject));

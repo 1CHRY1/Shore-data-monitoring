@@ -69,7 +69,6 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         if (y_move5 != null) {inclinometerRecord.setY_move2(y_move5.doubleValue());} else {inclinometerRecord.setY_move5(null);}
         if (x_move6 != null) {inclinometerRecord.setX_move2(x_move6.doubleValue());} else {inclinometerRecord.setX_move6(null);}
         if (y_move6 != null) {inclinometerRecord.setY_move2(y_move6.doubleValue());} else {inclinometerRecord.setY_move6(null);}
-
         return inclinometerRecord;
     }
     @Override

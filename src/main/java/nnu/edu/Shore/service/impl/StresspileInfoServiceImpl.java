@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.dao.shore.StresspileInfoMapper;
 import nnu.edu.Shore.pojo.InclinometerInfo;
+import com.alibaba.fastjson2.JSONObject;
+import nnu.edu.Shore.dao.shore.StresspileInfoMapper;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.StresspileInfo;
 import nnu.edu.Shore.pojo.StresspileInfo.StresspileInfoIdGroup;
@@ -62,7 +64,6 @@ public class StresspileInfoServiceImpl implements StresspileInfoService {
         stresspileInfo.setData_v(data_v);
         stresspileInfo.setIn_operator(in_operator);
         stresspileInfo.setNotes(notes);
-
         return stresspileInfo;
     }
 
