@@ -17,9 +17,9 @@ import java.util.List;
 public interface StresspileRecordService {
     String insertStresspileRecord(JSONObject jsonObject);
 
-    String updateStresspileRecord(StresspileRecord stresspileRecord);
-
-    String deleteStresspileRecord(String machine_id_nnu);
-
-    List<Machine> getStresspileRecords();
+//    String updateStresspileRecord(StresspileRecord stresspileRecord);
+//
+//    String deleteStresspileRecord(String machine_id_nnu);
+//
+//    List<Machine> getStresspileRecords();
 }

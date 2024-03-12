@@ -15,10 +15,10 @@ import java.util.List;
  */
 public interface InclinometerInfoService {
     String insertInclinometerInfo(JSONObject jsonObject);
-
-    String updateInclinometerInfo(InclinometerInfo inclinometerInfo);
-
-    String deleteInclinometerInfo(String machine_id_nnu);
-
-    List<Machine> getInclinometerInfos();
+//
+//    String updateInclinometerInfo(InclinometerInfo inclinometerInfo);
+//
+//    String deleteInclinometerInfo(String machine_id_nnu);
+//
+//    List<Machine> getInclinometerInfos();
 }

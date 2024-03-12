@@ -1,9 +1,6 @@
 package nnu.edu.Shore.service.impl;
 
-<<<<<<< HEAD
 import com.alibaba.fastjson2.JSONException;
-=======
->>>>>>> 0702b42a43b630e0501b3f0f9891176eb06e4759
 import com.alibaba.fastjson2.JSONObject;
 import nnu.edu.Shore.dao.shore.MachineMapper;
 import nnu.edu.Shore.pojo.Machine;
@@ -76,18 +73,18 @@ public class MachineServiceImpl implements MachineService {
         return machine.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateMachine(Machine machine) {
-        return null;
-    }
-
-    @Override
-    public String deleteMachine(String machine_id) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getMachines() {
-        return null;
-    }
+//    @Override
+//    public String updateMachine(Machine machine) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteMachine(String machine_id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getMachines() {
+//        return null;
+//    }
 }

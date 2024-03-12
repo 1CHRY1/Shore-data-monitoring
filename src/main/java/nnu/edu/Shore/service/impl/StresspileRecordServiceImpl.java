@@ -90,18 +90,18 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         return stresspileRecord.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateStresspileRecord(StresspileRecord stresspileRecord) {
-        return null;
-    }
-
-    @Override
-    public String deleteStresspileRecord(String machine_id_nnu) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getStresspileRecords() {
-        return null;
-    }
+//    @Override
+//    public String updateStresspileRecord(StresspileRecord stresspileRecord) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteStresspileRecord(String machine_id_nnu) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getStresspileRecords() {
+//        return null;
+//    }
 }

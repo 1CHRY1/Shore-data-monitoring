@@ -73,18 +73,18 @@ public class InclinometerInfoServiceImpl implements InclinometerInfoService {
         return inclinometerInfo.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateInclinometerInfo(InclinometerInfo inclinometerInfo) {
-        return null;
-    }
-
-    @Override
-    public String deleteInclinometerInfo(String machine_id_nnu) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getInclinometerInfos() {
-        return null;
-    }
+//    @Override
+//    public String updateInclinometerInfo(InclinometerInfo inclinometerInfo) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteInclinometerInfo(String machine_id_nnu) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getInclinometerInfos() {
+//        return null;
+//    }
 }

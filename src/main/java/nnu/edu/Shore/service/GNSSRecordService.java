@@ -16,9 +16,9 @@ import java.util.List;
 public interface GNSSRecordService {
     String insertGNSSRecord(JSONObject jsonObject);
 
-    String updateGNSSRecord(GNSSRecord gnssRecord);
-
-    String deleteGNSSRecord(String gnssRecord);
-
-    List<GNSSRecord> getGNSSRecords();
+//    String updateGNSSRecord(GNSSRecord gnssRecord);
+//
+//    String deleteGNSSRecord(String gnssRecord);
+//
+//    List<GNSSRecord> getGNSSRecords();
 }

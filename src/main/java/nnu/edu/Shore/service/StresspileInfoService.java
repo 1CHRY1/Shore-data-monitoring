@@ -16,9 +16,9 @@ import java.util.List;
 public interface StresspileInfoService {
     String insertStresspileInfo(JSONObject jsonObject);
 
-    String updateStresspileInfo(StresspileInfo stresspileInfo);
-
-    String deleteStresspileInfo(String machine_id_nnu);
-
-    List<Machine> getStresspileInfos();
+//    String updateStresspileInfo(StresspileInfo stresspileInfo);
+//
+//    String deleteStresspileInfo(String machine_id_nnu);
+//
+//    List<Machine> getStresspileInfos();
 }

@@ -74,18 +74,18 @@ public class StresspileInfoServiceImpl implements StresspileInfoService {
         return stresspileInfo.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateStresspileInfo(StresspileInfo stresspileInfo) {
-        return null;
-    }
-
-    @Override
-    public String deleteStresspileInfo(String machine_id_nnu) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getStresspileInfos() {
-        return null;
-    }
+//    @Override
+//    public String updateStresspileInfo(StresspileInfo stresspileInfo) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteStresspileInfo(String machine_id_nnu) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getStresspileInfos() {
+//        return null;
+//    }
 }

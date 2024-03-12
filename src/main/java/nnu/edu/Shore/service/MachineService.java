@@ -16,9 +16,9 @@ import java.util.List;
 public interface MachineService {
     String insertMachine(JSONObject jsonObject);
 
-    String updateMachine(Machine machine);
-
-    String deleteMachine(String machine_id_nnu);
-
-    List<Machine> getMachines();
+//    String updateMachine(Machine machine);
+//
+//    String deleteMachine(String machine_id_nnu);
+//
+//    List<Machine> getMachines();
 }

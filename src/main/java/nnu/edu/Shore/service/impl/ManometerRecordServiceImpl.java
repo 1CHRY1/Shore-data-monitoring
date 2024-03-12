@@ -66,18 +66,18 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         return manometerRecord.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateManometerRecord(ManometerRecord manometerRecord) {
-        return null;
-    }
-
-    @Override
-    public String deleteManometerRecord(String machine_id_nnu) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getManometerRecords() {
-        return null;
-    }
+//    @Override
+//    public String updateManometerRecord(ManometerRecord manometerRecord) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteManometerRecord(String machine_id_nnu) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getManometerRecords() {
+//        return null;
+//    }
 }

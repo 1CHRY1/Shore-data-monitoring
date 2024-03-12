@@ -15,9 +15,9 @@ import java.util.List;
 public interface StationService {
     String insertStation(JSONObject jsonObject);
 
-    String updateStation(Station station);
-
-    String deleteStation(String station_id);
-
-    List<Station> getStations();
+//    String updateStation(Station station);
+//
+//    String deleteStation(String station_id);
+//
+//    List<Station> getStations();
 }

@@ -78,18 +78,18 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         return inclinometerRecord.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateInclinometerRecord(InclinometerRecord inclinometerRecord) {
-        return null;
-    }
-
-    @Override
-    public String deleteInclinometerRecord(String machine_id_nnu) {
-        return null;
-    }
-
-    @Override
-    public List<Machine> getInclinometerRecords() {
-        return null;
-    }
+//    @Override
+//    public String updateInclinometerRecord(InclinometerRecord inclinometerRecord) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteInclinometerRecord(String machine_id_nnu) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Machine> getInclinometerRecords() {
+//        return null;
+//    }
 }

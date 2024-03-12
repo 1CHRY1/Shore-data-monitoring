@@ -59,18 +59,18 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
         return gnssRecord.getIdGroup().getMachine_id();
     }
 
-    @Override
-    public String updateGNSSRecord(GNSSRecord gnssRecord) {
-        return null;
-    }
-
-    @Override
-    public String deleteGNSSRecord(String gnssRecord) {
-        return null;
-    }
-
-    @Override
-    public List<GNSSRecord> getGNSSRecords() {
-        return null;
-    }
+//    @Override
+//    public String updateGNSSRecord(GNSSRecord gnssRecord) {
+//        return null;
+//    }
+//
+//    @Override
+//    public String deleteGNSSRecord(String gnssRecord) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<GNSSRecord> getGNSSRecords() {
+//        return null;
+//    }
 }

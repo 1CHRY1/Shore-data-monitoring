@@ -31,21 +31,21 @@ public class StationController {
         return ResultUtils.success(stationService.insertStation(jsonObject));
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.PUT)
-    public JsonResult updateStation(@RequestBody Station station){
-        // 更新测站信息数据
-        return ResultUtils.success(stationService.updateStation(station));
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public JsonResult deleteStation(@RequestBody String station_id){
-        // 删除测站信息数据
-        return ResultUtils.success(stationService.deleteStation(station_id));
-    }
-
-    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
-    public JsonResult getStations(){
-        // 获取所有站点信息数据
-        return ResultUtils.success(stationService.getStations());
-    }
+//    @RequestMapping(value="/update", method = RequestMethod.PUT)
+//    public JsonResult updateStation(@RequestBody Station station){
+//        // 更新测站信息数据
+//        return ResultUtils.success(stationService.updateStation(station));
+//    }
+//
+//    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+//    public JsonResult deleteStation(@RequestBody String station_id){
+//        // 删除测站信息数据
+//        return ResultUtils.success(stationService.deleteStation(station_id));
+//    }
+//
+//    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
+//    public JsonResult getStations(){
+//        // 获取所有站点信息数据
+//        return ResultUtils.success(stationService.getStations());
+//    }
 }

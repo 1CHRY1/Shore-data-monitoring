@@ -18,9 +18,9 @@ import java.util.List;
 public interface ManometerRecordService {
     String insertManometerRecord(JSONObject jsonObject);
 
-    String updateManometerRecord(ManometerRecord manometerRecord);
-
-    String deleteManometerRecord(String machine_id_nnu);
-
-    List<Machine> getManometerRecords();
+//    String updateManometerRecord(ManometerRecord manometerRecord);
+//
+//    String deleteManometerRecord(String machine_id_nnu);
+//
+//    List<Machine> getManometerRecords();
 }

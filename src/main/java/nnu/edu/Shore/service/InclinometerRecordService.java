@@ -17,9 +17,9 @@ import java.util.List;
 public interface InclinometerRecordService {
     String insertInclinometerRecord(JSONObject jsonObject);
 
-    String updateInclinometerRecord(InclinometerRecord inclinometerRecord);
-
-    String deleteInclinometerRecord(String machine_id_nnu);
-
-    List<Machine> getInclinometerRecords();
+//    String updateInclinometerRecord(InclinometerRecord inclinometerRecord);
+//
+//    String deleteInclinometerRecord(String machine_id_nnu);
+//
+//    List<Machine> getInclinometerRecords();
 }
