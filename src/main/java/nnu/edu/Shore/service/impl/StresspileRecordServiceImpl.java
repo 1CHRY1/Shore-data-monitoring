@@ -8,6 +8,7 @@ import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.ManometerRecord;
 import nnu.edu.Shore.pojo.StresspileRecord;
 import nnu.edu.Shore.pojo.StresspileRecord.StresspileRecordIdGroup;
+import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.StresspileRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,15 +29,20 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
     @Autowired
     StresspileRecordMapper stresspileRecordMapper;
 
+    @Autowired
+    MachineService machineService;
+
     private StresspileRecord dataProcess(JSONObject jsonObject){
         StresspileRecord stresspileRecord;
+        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
         // 判断请求格式和非空字段是否正确
         try {
             stresspileRecord = StresspileRecord.builder()
                     .idGroup(StresspileRecordIdGroup.builder()
                             .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
-                            .machine_id(jsonObject.getJSONObject("idGroup").getString("machine_id"))
-                            .machine_id_nnu(jsonObject.getJSONObject("idGroup").getString("machine_id_nnu"))
+                            .machine_id(machine_id)
+                            .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
                             .build())
                     .horizontal1(jsonObject.getDouble("horizontal1"))

@@ -8,6 +8,10 @@
                 #{longitude},#{latitude},#{elevation},#{in_time},#{operate_time},#{data_v},#{in_operator},#{notes})
     </insert>
 
+    <select id="getMachineInfo" resultType="nnu.edu.Shore.pojo.Machine">
+        SELECT * from machine where machine_id=#{machine_id}
+    </select>
+
 <!--    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">-->
 <!--        UPDATE station-->
 <!--        SET-->

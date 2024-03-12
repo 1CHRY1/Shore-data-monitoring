@@ -1,10 +1,10 @@
 spring:
   datasource:
     shore:
-      jdbc-url: jdbc:postgresql://localhost:5432/shore_backup?stringtype=unspecified
+      jdbc-url: jdbc:postgresql://localhost:5432/shore_test?stringtype=unspecified
       driver-class-name: org.postgresql.Driver
       username: postgres
-      password: 123456
+      password: 123
 
 python:
   python

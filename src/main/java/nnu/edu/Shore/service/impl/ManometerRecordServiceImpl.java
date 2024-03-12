@@ -7,6 +7,7 @@ import nnu.edu.Shore.pojo.InclinometerInfo;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.ManometerRecord;
 import nnu.edu.Shore.pojo.ManometerRecord.ManometerRecordIdGroup;
+import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.ManometerRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,15 +28,20 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
     @Autowired
     ManometerRecordMapper manometerRecordMapper;
 
+    @Autowired
+    MachineService machineService;
+
     private ManometerRecord dataProccess(JSONObject jsonObject){
         ManometerRecord manometerRecord;
+        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
         // 判断请求格式和非空字段是否正确
         try {
             manometerRecord = ManometerRecord.builder()
                     .idGroup(ManometerRecordIdGroup.builder()
                             .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
-                            .machine_id(jsonObject.getJSONObject("idGroup").getString("machine_id"))
-                            .machine_id_nnu(jsonObject.getJSONObject("idGroup").getString("machine_id_nnu"))
+                            .machine_id(machine_id)
+                            .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
                             .build())
                     .pressure1(jsonObject.getDouble("pressure1"))

@@ -17,9 +17,9 @@ import java.util.List;
 public interface StationMapper {
     void insertStation(Station station);
 
-    void updateStation(Station station);
-
-    void deleteStation(String stationId);
-
-    List<Station> getStations();
+//    void updateStation(Station station);
+//
+//    void deleteStation(String stationId);
+//
+//    List<Station> getStations();
 }

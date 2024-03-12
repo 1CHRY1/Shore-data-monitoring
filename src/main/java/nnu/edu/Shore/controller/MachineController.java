@@ -8,10 +8,7 @@ import nnu.edu.Shore.pojo.Station;
 import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,5 +28,11 @@ public class MachineController {
     public JsonResult insertMachine(@RequestBody JSONObject jsonObject){
         // 插入设备信息数据
         return ResultUtils.success(machineService.insertMachine(jsonObject));
+    }
+
+    @GetMapping(value="/get")
+    public JsonResult getMachineInfo(@RequestParam String machine_id) {
+        // 通过设备标识码获取设备信息
+        return ResultUtils.success(machineService.getMachineInfo(machine_id));
     }
 }

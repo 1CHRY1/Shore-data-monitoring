@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 public interface ManometerInfoMapper {
     void insertManometerInfo(ManometerInfo manometerInfo);
 
-    void updateManometerInfo(ManometerInfo manometerInfo);
-
-    void deleteManometerInfo(String machine_id_nnu);
-
-    void getManometerInfos();
+//    void updateManometerInfo(ManometerInfo manometerInfo);
+//
+//    void deleteManometerInfo(String machine_id_nnu);
+//
+//    void getManometerInfos();
 }

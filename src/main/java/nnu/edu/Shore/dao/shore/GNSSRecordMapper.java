@@ -16,9 +16,9 @@ import org.springframework.stereotype.Repository;
 public interface GNSSRecordMapper {
     void insertGNSSRecord(GNSSRecord gnssRecord);
 
-    void updateGNSSRecord(Machine gnssRecord);
-
-    void deleteGNSSRecord(String machine_id_nnu);
-
-    void getGNSSRecords();
+//    void updateGNSSRecord(Machine gnssRecord);
+//
+//    void deleteGNSSRecord(String machine_id_nnu);
+//
+//    void getGNSSRecords();
 }

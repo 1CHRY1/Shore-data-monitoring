@@ -7,6 +7,7 @@ import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.GNSSRecord.GNSSRecordIdGroup;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.service.GNSSRecordService;
+import nnu.edu.Shore.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,16 +27,21 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     @Autowired
     GNSSRecordMapper gnssRecordMapper;
 
+    @Autowired
+    MachineService machineService;
+
     private GNSSRecord dataProcess(JSONObject jsonObject){
         GNSSRecord gnssRecord;
+        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
         // 判断请求格式和非空字段是否正确
         try {
             gnssRecord = GNSSRecord.builder()
                     .idGroup(
                             GNSSRecordIdGroup.builder()
                                     .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
-                                    .machine_id(jsonObject.getJSONObject("idGroup").getString("machine_id"))
-                                    .machine_id_nnu(jsonObject.getJSONObject("idGroup").getString("machine_id_nnu"))
+                                    .machine_id(machine_id)
+                                    .machine_id_nnu(machine_id_nnu)
                                     .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
                                     .build())
                     .x_move(jsonObject.getDouble("x_move"))

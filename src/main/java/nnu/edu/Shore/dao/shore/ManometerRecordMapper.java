@@ -16,9 +16,9 @@ import org.springframework.stereotype.Repository;
 public interface ManometerRecordMapper {
     void insertManometerRecord(ManometerRecord manometerRecord);
 
-    void updateManometerRecord(ManometerRecord manometerRecord);
-
-    void deleteManometerRecord(String machine_id_nnu);
-
-    void getManometerRecords();
+//    void updateManometerRecord(ManometerRecord manometerRecord);
+//
+//    void deleteManometerRecord(String machine_id_nnu);
+//
+//    void getManometerRecords();
 }

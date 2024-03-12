@@ -16,25 +16,25 @@
         VALUES (#{station_id}, #{begin_time}, #{end_time}, #{operate_time}, #{operator}, #{data_v}, #{data_v_explain})
     </insert>
 
-    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">
-        UPDATE station
-        SET
-            begin_time = #{begin_time},
-            end_time = #{end_time},
-            operate_time = #{operate_time},
-            operator = #{operator},
-            data_v = #{data_v},
-            data_v_explain = #{data_v_explain}
-        WHERE
-            station_id = #{station_id}
-    </update>
+<!--    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">-->
+<!--        UPDATE station-->
+<!--        SET-->
+<!--            begin_time = #{begin_time},-->
+<!--            end_time = #{end_time},-->
+<!--            operate_time = #{operate_time},-->
+<!--            operator = #{operator},-->
+<!--            data_v = #{data_v},-->
+<!--            data_v_explain = #{data_v_explain}-->
+<!--        WHERE-->
+<!--            station_id = #{station_id}-->
+<!--    </update>-->
 
-    <delete id="deleteStation" parameterType="String">
-        DELETE FROM station
-        WHERE station_id = #{stationId}
-    </delete>
+<!--    <delete id="deleteStation" parameterType="String">-->
+<!--        DELETE FROM station-->
+<!--        WHERE station_id = #{stationId}-->
+<!--    </delete>-->
 
-    <select id="getStations"  resultType="nnu.edu.Shore.pojo.Station">
-        select * from station
-    </select>
+<!--    <select id="getStations"  resultType="nnu.edu.Shore.pojo.Station">-->
+<!--        select * from station-->
+<!--    </select>-->
 </mapper>

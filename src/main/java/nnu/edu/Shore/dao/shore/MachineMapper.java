@@ -1,5 +1,6 @@
 package nnu.edu.Shore.dao.shore;
 
+import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.pojo.Machine;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +16,10 @@ import org.springframework.stereotype.Repository;
 public interface MachineMapper {
     void insertMachine(Machine machine);
 
-    void updateMachine(Machine machine);
-
-    void deleteMachine(String machine_id_nnu);
-
-    void getMachines();
+    Machine getMachineInfo(String machine_id);
+//    void updateMachine(Machine machine);
+//
+//    void deleteMachine(String machine_id_nnu);
+//
+//    void getMachines();
 }

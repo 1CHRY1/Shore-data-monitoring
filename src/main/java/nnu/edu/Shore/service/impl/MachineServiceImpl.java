@@ -2,6 +2,7 @@ package nnu.edu.Shore.service.impl;
 
 import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONObject;
+import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.dao.shore.MachineMapper;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.Machine.MachineIdGroup;
@@ -71,6 +72,11 @@ public class MachineServiceImpl implements MachineService {
         Machine machine = dataProcess(jsonObject);
         machineMapper.insertMachine(machine);
         return machine.getIdGroup().getMachine_id();
+    }
+
+    @Override
+    public Machine getMachineInfo(String machine_id){
+        return machineMapper.getMachineInfo(machine_id);
     }
 
 //    @Override

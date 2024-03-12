@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 public interface StresspileInfoMapper {
     void insertStresspileInfo(StresspileInfo stresspileInfo);
 
-    void updateStresspileInfo(StresspileInfo stresspileInfo);
-
-    void deleteStresspileInfo(String machine_id_nnu);
-
-    void getStresspileInfos();
+//    void updateStresspileInfo(StresspileInfo stresspileInfo);
+//
+//    void deleteStresspileInfo(String machine_id_nnu);
+//
+//    void getStresspileInfos();
 }

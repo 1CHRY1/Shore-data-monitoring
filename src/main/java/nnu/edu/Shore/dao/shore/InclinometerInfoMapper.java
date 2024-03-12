@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 public interface InclinometerInfoMapper {
     void insertInclinometerInfo(InclinometerInfo inclinometerInfo);
 
-    void updateInclinometerInfo(InclinometerInfo inclinometerInfo);
-
-    void deleteInclinometerInfo(String machine_id_nnu);
-
-    void getInclinometerInfos();
+//    void updateInclinometerInfo(InclinometerInfo inclinometerInfo);
+//
+//    void deleteInclinometerInfo(String machine_id_nnu);
+//
+//    void getInclinometerInfos();
 }

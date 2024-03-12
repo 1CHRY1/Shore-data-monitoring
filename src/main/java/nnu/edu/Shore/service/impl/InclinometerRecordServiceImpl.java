@@ -10,6 +10,7 @@ import nnu.edu.Shore.pojo.InclinometerRecord.InclinometerRecordIdGroup;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.service.InclinometerInfoService;
 import nnu.edu.Shore.service.InclinometerRecordService;
+import nnu.edu.Shore.service.MachineService;
 import org.apache.tomcat.Jar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,20 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
     @Autowired
     InclinometerRecordMapper inclinometerRecordMapper;
 
+    @Autowired
+    MachineService machineService;
+
     private InclinometerRecord dataProcess(JSONObject jsonObject){
         InclinometerRecord inclinometerRecord;
+        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
         // 判断请求格式和非空字段是否正确
         try {
             inclinometerRecord = InclinometerRecord.builder()
                     .idGroup(InclinometerRecordIdGroup.builder()
                             .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
-                            .machine_id(jsonObject.getJSONObject("idGroup").getString("machine_id"))
-                            .machine_id_nnu(jsonObject.getJSONObject("idGroup").getString("machine_id_nnu"))
+                            .machine_id(machine_id)
+                            .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
                             .build())
                     .x_move1(jsonObject.getDouble("x_move1"))
