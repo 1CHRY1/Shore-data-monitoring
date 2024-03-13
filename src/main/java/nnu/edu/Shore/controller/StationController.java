@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/Station")
+@RequestMapping("api/v1/station/info")
 public class StationController {
     @Autowired
     StationService stationService;

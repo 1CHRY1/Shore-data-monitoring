@@ -10,6 +10,7 @@ import nnu.edu.Shore.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -38,15 +39,12 @@ public class StationServiceImpl implements StationService {
             return Station.builder().build();
         }
         // 判断其他字段
-        String operate_time = (String) jsonObject.getOrDefault("operate_time",null);
-        String operator = (String) jsonObject.getOrDefault("operator",null);
-        Integer data_v = (Integer) jsonObject.getOrDefault("data_v",null);
-        String data_v_explain = (String) jsonObject.getOrDefault("data_v_explain",null);
+        String operate_time = LocalDateTime.now().toString();
 
         station.setOperate_time(operate_time);
-        station.setOperator(operator);
-        station.setData_v(data_v);
-        station.setData_v_explain(data_v_explain);
+        station.setOperator("Admin");
+        station.setData_v(1);
+        station.setData_v_explain("version 1.0");
 
         return station;
     }
