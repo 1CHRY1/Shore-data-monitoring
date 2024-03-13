@@ -1,11 +1,6 @@
 package nnu.edu.Shore.service;
 
 import com.alibaba.fastjson2.JSONObject;
-import nnu.edu.Shore.common.result.JsonResult;
-import nnu.edu.Shore.pojo.Machine;
-import nnu.edu.Shore.pojo.Station;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +12,7 @@ import java.util.List;
 public interface MachineService {
     String insertMachine(JSONObject jsonObject);
 
-    Machine getMachineInfo(String machine_id);
+    JSONObject getMachineInfo(String machine_id);
 //    String updateMachine(Machine machine);
 //
 //    String deleteMachine(String machine_id_nnu);

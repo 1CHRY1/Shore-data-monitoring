@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -38,12 +39,17 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
     private InclinometerRecord dataProcess(JSONObject jsonObject){
         InclinometerRecord inclinometerRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        if (machineInfo == null) {
+            return null;
+        }
+        String station_id = machineInfo.getString("station_id");
+        String machine_id_nnu = machineInfo.getString("machine_id_nnu");
         // 判断请求格式和非空字段是否正确
         try {
             inclinometerRecord = InclinometerRecord.builder()
                     .idGroup(InclinometerRecordIdGroup.builder()
-                            .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
+                            .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
@@ -75,11 +81,16 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         if (y_move5 != null) {inclinometerRecord.setY_move2(y_move5.doubleValue());} else {inclinometerRecord.setY_move5(null);}
         if (x_move6 != null) {inclinometerRecord.setX_move2(x_move6.doubleValue());} else {inclinometerRecord.setX_move6(null);}
         if (y_move6 != null) {inclinometerRecord.setY_move2(y_move6.doubleValue());} else {inclinometerRecord.setY_move6(null);}
+        String in_time = LocalDateTime.now().toString();
+        inclinometerRecord.setIn_time(in_time);
         return inclinometerRecord;
     }
     @Override
     public String insertInclinometerRecord(JSONObject jsonObject) {
         InclinometerRecord inclinometerRecord = dataProcess(jsonObject);
+        if (inclinometerRecord == null) {
+            return "设备id不存在";
+        }
         inclinometerRecordMapper.insertInclinometerRecord(inclinometerRecord);
         return inclinometerRecord.getIdGroup().getMachine_id();
     }

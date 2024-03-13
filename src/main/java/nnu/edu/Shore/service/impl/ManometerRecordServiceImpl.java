@@ -12,6 +12,7 @@ import nnu.edu.Shore.service.ManometerRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -34,12 +35,17 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
     private ManometerRecord dataProccess(JSONObject jsonObject){
         ManometerRecord manometerRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        if (machineInfo == null) {
+            return null;
+        }
+        String station_id = machineInfo.getString("station_id");
+        String machine_id_nnu = machineInfo.getString("machine_id_nnu");
         // 判断请求格式和非空字段是否正确
         try {
             manometerRecord = ManometerRecord.builder()
                     .idGroup(ManometerRecordIdGroup.builder()
-                            .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
+                            .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
@@ -55,12 +61,12 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         Number pressure4 = (Number) jsonObject.getOrDefault("pressure4",null);
         Number pressure5 = (Number) jsonObject.getOrDefault("pressure5",null);
         Number pressure6 = (Number) jsonObject.getOrDefault("pressure6",null);
-        String in_time = (String) jsonObject.getOrDefault("in_time",null);
         if (pressure2 != null) { manometerRecord.setPressure2(pressure2.doubleValue()); } else { manometerRecord.setPressure2(null);}
         if (pressure3 != null) { manometerRecord.setPressure3(pressure3.doubleValue()); } else { manometerRecord.setPressure3(null);}
         if (pressure4 != null) { manometerRecord.setPressure4(pressure4.doubleValue()); } else { manometerRecord.setPressure4(null);}
         if (pressure5 != null) { manometerRecord.setPressure5(pressure5.doubleValue()); } else { manometerRecord.setPressure5(null);}
         if (pressure6 != null) { manometerRecord.setPressure6(pressure6.doubleValue()); } else { manometerRecord.setPressure6(null);}
+        String in_time = LocalDateTime.now().toString();
         manometerRecord.setIn_time(in_time);
         return manometerRecord;
     }
@@ -68,6 +74,9 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
     @Override
     public String insertManometerRecord(JSONObject jsonObject) {
         ManometerRecord manometerRecord = dataProccess(jsonObject);
+        if (manometerRecord == null) {
+            return "设备id不存在";
+        }
         manometerRecordMapper.insertManometerRecord(manometerRecord);
         return manometerRecord.getIdGroup().getMachine_id();
     }

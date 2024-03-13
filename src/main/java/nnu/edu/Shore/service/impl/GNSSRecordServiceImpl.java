@@ -2,6 +2,7 @@ package nnu.edu.Shore.service.impl;
 
 import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONObject;
+import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.dao.shore.GNSSRecordMapper;
 import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.GNSSRecord.GNSSRecordIdGroup;
@@ -11,6 +12,7 @@ import nnu.edu.Shore.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -33,13 +35,18 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     private GNSSRecord dataProcess(JSONObject jsonObject){
         GNSSRecord gnssRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        if (machineInfo == null) {
+            return null;
+        }
+        String station_id = machineInfo.getString("station_id");
+        String machine_id_nnu = machineInfo.getString("machine_id_nnu");
         // 判断请求格式和非空字段是否正确
         try {
             gnssRecord = GNSSRecord.builder()
                     .idGroup(
                             GNSSRecordIdGroup.builder()
-                                    .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
+                                    .station_id(station_id)
                                     .machine_id(machine_id)
                                     .machine_id_nnu(machine_id_nnu)
                                     .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
@@ -53,7 +60,7 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
             return GNSSRecord.builder().build();
         }
         // 判断其他字段
-        String in_time = (String) jsonObject.getOrDefault("in_time", null);
+        String in_time = LocalDateTime.now().toString();
         gnssRecord.setIn_time(in_time);
         return gnssRecord;
     }
@@ -61,6 +68,9 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     @Override
     public String insertGNSSRecord(JSONObject jsonObject) {
         GNSSRecord gnssRecord = dataProcess(jsonObject);
+        if (gnssRecord == null) {
+            return "设备id不存在";
+        }
         gnssRecordMapper.insertGNSSRecord(gnssRecord);
         return gnssRecord.getIdGroup().getMachine_id();
     }

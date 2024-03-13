@@ -13,6 +13,7 @@ import nnu.edu.Shore.service.StresspileRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,12 +36,17 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
     private StresspileRecord dataProcess(JSONObject jsonObject){
         StresspileRecord stresspileRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        String machine_id_nnu = machineService.getMachineInfo(machine_id).getIdGroup().getMachine_id_nnu();
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        if (machineInfo == null) {
+            return null;
+        }
+        String station_id = machineInfo.getString("station_id");
+        String machine_id_nnu = machineInfo.getString("machine_id_nnu");
         // 判断请求格式和非空字段是否正确
         try {
             stresspileRecord = StresspileRecord.builder()
                     .idGroup(StresspileRecordIdGroup.builder()
-                            .station_id(jsonObject.getJSONObject("idGroup").getString("station_id"))
+                            .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
@@ -68,7 +74,6 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         Number horizontal6 = (Number) jsonObject.getOrDefault("horizontal6",null);
         Number horizontal_stress6 = (Number) jsonObject.getOrDefault("horizontal_stress6",null);
         Number vertical_stress6 = (Number) jsonObject.getOrDefault("vertical_stress6",null);
-        String in_time = (String) jsonObject.getOrDefault("in_time",null);
         if (horizontal2 != null) { stresspileRecord.setHorizontal2(horizontal2.doubleValue()); } else { stresspileRecord.setHorizontal2(null);}
         if (horizontal_stress2 != null) { stresspileRecord.setHorizontal_stress2(horizontal_stress2.doubleValue()); } else { stresspileRecord.setHorizontal2(null);}
         if (vertical_stress2 != null) { stresspileRecord.setVertical_stress2(vertical_stress2.doubleValue()); } else { stresspileRecord.setVertical_stress2(null);}
@@ -84,14 +89,18 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         if (horizontal6 != null) { stresspileRecord.setHorizontal6(horizontal6.doubleValue()); } else { stresspileRecord.setHorizontal6(null);}
         if (horizontal_stress6 != null) { stresspileRecord.setHorizontal_stress6(horizontal_stress6.doubleValue()); } else { stresspileRecord.setHorizontal6(null);}
         if (vertical_stress6 != null) { stresspileRecord.setVertical_stress6(vertical_stress6.doubleValue()); } else { stresspileRecord.setVertical_stress6(null);}
-        stresspileRecord.setIn_time(in_time);
 
+        String in_time = LocalDateTime.now().toString();
+        stresspileRecord.setIn_time(in_time);
         return stresspileRecord;
     }
 
     @Override
     public String insertStresspileRecord(JSONObject jsonObject) {
         StresspileRecord stresspileRecord = dataProcess(jsonObject);
+        if (stresspileRecord == null) {
+            return "设备id不存在";
+        }
         stresspileRecordMapper.insertStresspileRecord(stresspileRecord);
         return stresspileRecord.getIdGroup().getMachine_id();
     }

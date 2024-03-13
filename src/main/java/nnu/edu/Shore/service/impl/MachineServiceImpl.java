@@ -2,7 +2,6 @@ package nnu.edu.Shore.service.impl;
 
 import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONObject;
-import nnu.edu.Shore.common.result.JsonResult;
 import nnu.edu.Shore.dao.shore.MachineMapper;
 import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.Machine.MachineIdGroup;
@@ -10,9 +9,7 @@ import nnu.edu.Shore.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.text.DecimalFormat;
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,18 +48,19 @@ public class MachineServiceImpl implements MachineService {
         // 判断其他字段
         String begin_time = (String) jsonObject.getOrDefault("begin_time",null);
         String end_time = (String) jsonObject.getOrDefault("end_time", null);
-        String in_time = (String) jsonObject.getOrDefault("in_time", null);
-        String operate_time = (String) jsonObject.getOrDefault("operate_time", null);
-        Integer data_v = (Integer) jsonObject.getOrDefault("data_v", null);
-        String in_operator = (String) jsonObject.getOrDefault("in_operator", null);
-        String notes = (String) jsonObject.getOrDefault("notes", null);
         machine.setBegin_time(begin_time);
         machine.setEnd_time(end_time);
+
+        String in_time = LocalDateTime.now().toString();
+        machine.setOperate_time(in_time);
         machine.setIn_time(in_time);
-        machine.setOperate_time(operate_time);
-        machine.setData_v(data_v);
-        machine.setIn_operator(in_operator);
-        machine.setNotes(notes);
+
+        //其他信息
+        machine.setData_v(1);
+        machine.setIn_operator("Admin");
+        machine.setNotes("");
+
+        //生成唯一id
         machine.Onlyid();
         return machine;
     }
@@ -75,7 +73,7 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public Machine getMachineInfo(String machine_id){
+    public JSONObject getMachineInfo(String machine_id){
         return machineMapper.getMachineInfo(machine_id);
     }
 

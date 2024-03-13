@@ -8,7 +8,7 @@
                 #{longitude},#{latitude},#{elevation},#{in_time},#{operate_time},#{data_v},#{in_operator},#{notes})
     </insert>
 
-    <select id="getMachineInfo" resultType="nnu.edu.Shore.pojo.Machine">
+    <select id="getMachineInfo" resultType="com.alibaba.fastjson2.JSONObject">
         SELECT * from machine where machine_id=#{machine_id}
     </select>
 
