@@ -33,9 +33,10 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
     MachineService machineService;
 
     private ManometerRecord dataProccess(JSONObject jsonObject){
+        // 孔隙水压力计编号为3
         ManometerRecord manometerRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id, '3');
         if (machineInfo == null) {
             return null;
         }
@@ -50,6 +51,7 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
                             .machine_id_nnu(machine_id_nnu)
                             .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
                             .build())
+                    .in_time(LocalDateTime.now().toString())
                     .pressure1(jsonObject.getDouble("pressure1"))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
@@ -66,8 +68,7 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         if (pressure4 != null) { manometerRecord.setPressure4(pressure4.doubleValue()); } else { manometerRecord.setPressure4(null);}
         if (pressure5 != null) { manometerRecord.setPressure5(pressure5.doubleValue()); } else { manometerRecord.setPressure5(null);}
         if (pressure6 != null) { manometerRecord.setPressure6(pressure6.doubleValue()); } else { manometerRecord.setPressure6(null);}
-        String in_time = LocalDateTime.now().toString();
-        manometerRecord.setIn_time(in_time);
+
         return manometerRecord;
     }
 

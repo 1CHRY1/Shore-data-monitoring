@@ -73,8 +73,8 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public JSONObject getMachineInfo(String machine_id){
-        return machineMapper.getMachineInfo(machine_id);
+    public JSONObject getMachineInfo(String machine_id, Character type){
+        return machineMapper.getMachineInfo(machine_id, type);
     }
 
 //    @Override

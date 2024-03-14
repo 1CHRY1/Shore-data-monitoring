@@ -31,8 +31,8 @@ public class MachineController {
     }
 
     @GetMapping(value="/get")
-    public JsonResult getMachineInfo(@RequestParam String machine_id) {
+    public JsonResult getMachineInfo(@RequestParam String machine_id, @RequestParam Character type) {
         // 通过设备标识码获取设备信息
-        return ResultUtils.success(machineService.getMachineInfo(machine_id));
+        return ResultUtils.success(machineService.getMachineInfo(machine_id, type));
     }
 }

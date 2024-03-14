@@ -33,9 +33,10 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     MachineService machineService;
 
     private GNSSRecord dataProcess(JSONObject jsonObject){
+        // GNSS编号为1
         GNSSRecord gnssRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id,'1');
         if (machineInfo == null) {
             return null;
         }
@@ -54,14 +55,13 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
                     .x_move(jsonObject.getDouble("x_move"))
                     .y_move(jsonObject.getDouble("y_move"))
                     .z_move(jsonObject.getDouble("z_move"))
+                    .in_time(LocalDateTime.now().toString())
                     .build();
         }
         catch (JSONException | NumberFormatException | NullPointerException e) {
             return GNSSRecord.builder().build();
         }
-        // 判断其他字段
-        String in_time = LocalDateTime.now().toString();
-        gnssRecord.setIn_time(in_time);
+
         return gnssRecord;
     }
 

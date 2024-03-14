@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface MachineMapper {
     void insertMachine(Machine machine);
 
-    JSONObject getMachineInfo(String machine_id);
+    JSONObject getMachineInfo(String machine_id, Character type);
 //    void updateMachine(Machine machine);
 //
 //    void deleteMachine(String machine_id_nnu);

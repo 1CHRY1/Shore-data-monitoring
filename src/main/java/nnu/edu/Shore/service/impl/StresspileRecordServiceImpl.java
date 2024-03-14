@@ -34,9 +34,10 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
     MachineService machineService;
 
     private StresspileRecord dataProcess(JSONObject jsonObject){
+        // 应力桩编号为2
         StresspileRecord stresspileRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id,'2');
         if (machineInfo == null) {
             return null;
         }
@@ -54,6 +55,7 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
                     .horizontal1(jsonObject.getDouble("horizontal1"))
                     .horizontal_stress1(jsonObject.getDouble("horizontal_stress1"))
                     .vertical_stress1(jsonObject.getDouble("vertical_stress1"))
+                    .in_time(LocalDateTime.now().toString())
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return StresspileRecord.builder().build();
@@ -90,8 +92,6 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         if (horizontal_stress6 != null) { stresspileRecord.setHorizontal_stress6(horizontal_stress6.doubleValue()); } else { stresspileRecord.setHorizontal6(null);}
         if (vertical_stress6 != null) { stresspileRecord.setVertical_stress6(vertical_stress6.doubleValue()); } else { stresspileRecord.setVertical_stress6(null);}
 
-        String in_time = LocalDateTime.now().toString();
-        stresspileRecord.setIn_time(in_time);
         return stresspileRecord;
     }
 

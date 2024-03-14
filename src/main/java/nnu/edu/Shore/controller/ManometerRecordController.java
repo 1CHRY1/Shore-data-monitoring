@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("api/v1/Manometer/record")
+@RequestMapping("api/v1/manometer/record")
 public class ManometerRecordController {
     @Autowired
     ManometerRecordService manometerRecordService;

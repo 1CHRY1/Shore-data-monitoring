@@ -37,9 +37,10 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
     MachineService machineService;
 
     private InclinometerRecord dataProcess(JSONObject jsonObject){
+        // 测斜仪编号为4
         InclinometerRecord inclinometerRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id,'4');
         if (machineInfo == null) {
             return null;
         }
@@ -56,6 +57,7 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
                             .build())
                     .x_move1(jsonObject.getDouble("x_move1"))
                     .y_move1(jsonObject.getDouble("y_move1"))
+                    .in_time(LocalDateTime.now().toString())
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return InclinometerRecord.builder().build();
@@ -73,16 +75,15 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         Number y_move6 = (Number) jsonObject.getOrDefault("y_move6",null);
         if (x_move2 != null) {inclinometerRecord.setX_move2(x_move2.doubleValue());} else {inclinometerRecord.setX_move2(null);}
         if (y_move2 != null) {inclinometerRecord.setY_move2(y_move2.doubleValue());} else {inclinometerRecord.setY_move2(null);}
-        if (x_move3 != null) {inclinometerRecord.setX_move2(x_move3.doubleValue());} else {inclinometerRecord.setX_move3(null);}
-        if (y_move3 != null) {inclinometerRecord.setY_move2(y_move3.doubleValue());} else {inclinometerRecord.setY_move3(null);}
-        if (x_move4 != null) {inclinometerRecord.setX_move2(x_move4.doubleValue());} else {inclinometerRecord.setX_move4(null);}
-        if (y_move4 != null) {inclinometerRecord.setY_move2(y_move4.doubleValue());} else {inclinometerRecord.setY_move4(null);}
-        if (x_move5 != null) {inclinometerRecord.setX_move2(x_move5.doubleValue());} else {inclinometerRecord.setX_move5(null);}
-        if (y_move5 != null) {inclinometerRecord.setY_move2(y_move5.doubleValue());} else {inclinometerRecord.setY_move5(null);}
-        if (x_move6 != null) {inclinometerRecord.setX_move2(x_move6.doubleValue());} else {inclinometerRecord.setX_move6(null);}
-        if (y_move6 != null) {inclinometerRecord.setY_move2(y_move6.doubleValue());} else {inclinometerRecord.setY_move6(null);}
-        String in_time = LocalDateTime.now().toString();
-        inclinometerRecord.setIn_time(in_time);
+        if (x_move3 != null) {inclinometerRecord.setX_move3(x_move3.doubleValue());} else {inclinometerRecord.setX_move3(null);}
+        if (y_move3 != null) {inclinometerRecord.setY_move3(y_move3.doubleValue());} else {inclinometerRecord.setY_move3(null);}
+        if (x_move4 != null) {inclinometerRecord.setX_move4(x_move4.doubleValue());} else {inclinometerRecord.setX_move4(null);}
+        if (y_move4 != null) {inclinometerRecord.setY_move4(y_move4.doubleValue());} else {inclinometerRecord.setY_move4(null);}
+        if (x_move5 != null) {inclinometerRecord.setX_move5(x_move5.doubleValue());} else {inclinometerRecord.setX_move5(null);}
+        if (y_move5 != null) {inclinometerRecord.setY_move5(y_move5.doubleValue());} else {inclinometerRecord.setY_move5(null);}
+        if (x_move6 != null) {inclinometerRecord.setX_move6(x_move6.doubleValue());} else {inclinometerRecord.setX_move6(null);}
+        if (y_move6 != null) {inclinometerRecord.setY_move6(y_move6.doubleValue());} else {inclinometerRecord.setY_move6(null);}
+
         return inclinometerRecord;
     }
     @Override

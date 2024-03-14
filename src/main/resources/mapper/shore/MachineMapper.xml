@@ -9,7 +9,7 @@
     </insert>
 
     <select id="getMachineInfo" resultType="com.alibaba.fastjson2.JSONObject">
-        SELECT * from machine where machine_id=#{machine_id}
+        SELECT * from machine where machine_id=#{machine_id} and type=#{type}
     </select>
 
 <!--    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">-->

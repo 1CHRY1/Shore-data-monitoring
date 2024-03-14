@@ -32,9 +32,10 @@ public class InclinometerInfoServiceImpl implements InclinometerInfoService {
     MachineService machineService;
 
     private InclinometerInfo dataProcess(JSONObject jsonObject){
+        // 测斜仪编号为4
         InclinometerInfo inclinometerInfo;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id,'4');
         if (machineInfo == null) {
             return null;
         }
@@ -48,8 +49,9 @@ public class InclinometerInfoServiceImpl implements InclinometerInfoService {
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
                             .build())
-                    .point_num(Integer.parseInt(jsonObject.getString("point_num")))
-                    .point1_depth(Double.parseDouble(jsonObject.getString("point1_depth")))
+                    .point_num(jsonObject.getInteger("point_num"))
+                    .point1_depth(jsonObject.getDouble("point1_depth"))
+                    .in_time(machineInfo.getString("in_time"))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return InclinometerInfo.builder().build();
@@ -62,12 +64,10 @@ public class InclinometerInfoServiceImpl implements InclinometerInfoService {
         Number point6_depth = (Number) jsonObject.getOrDefault("point6_depth",null);
 
         if (point2_depth != null) { inclinometerInfo.setPoint2_depth(point2_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
-        if (point3_depth != null) { inclinometerInfo.setPoint2_depth(point3_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
-        if (point4_depth != null) { inclinometerInfo.setPoint2_depth(point4_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
-        if (point5_depth != null) { inclinometerInfo.setPoint2_depth(point5_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
-        if (point6_depth != null) { inclinometerInfo.setPoint2_depth(point6_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
-        String in_time = jsonObject.getString("in_time");
-        inclinometerInfo.setIn_time(in_time);
+        if (point3_depth != null) { inclinometerInfo.setPoint3_depth(point3_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
+        if (point4_depth != null) { inclinometerInfo.setPoint4_depth(point4_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
+        if (point5_depth != null) { inclinometerInfo.setPoint5_depth(point5_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
+        if (point6_depth != null) { inclinometerInfo.setPoint6_depth(point6_depth.doubleValue()); } else { inclinometerInfo.setPoint6_depth(null);}
 
         // 其他信息
         inclinometerInfo.setData_v(1);

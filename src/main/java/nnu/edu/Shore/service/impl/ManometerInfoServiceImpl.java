@@ -32,9 +32,10 @@ public class ManometerInfoServiceImpl implements ManometerInfoService {
     MachineService machineService;
 
     private ManometerInfo dataProcess(JSONObject jsonObject){
+        // 孔隙水压力计编号为3
         ManometerInfo manometerInfo;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
-        JSONObject machineInfo = machineService.getMachineInfo(machine_id);
+        JSONObject machineInfo = machineService.getMachineInfo(machine_id,'2');
         if (machineInfo == null) {
             return null;
         }
@@ -50,10 +51,12 @@ public class ManometerInfoServiceImpl implements ManometerInfoService {
                             .build())
                     .point_num(jsonObject.getInteger("point_num"))
                     .point1_depth(jsonObject.getDouble("point1_depth"))
+                    .in_time(machineInfo.getString("in_time"))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return ManometerInfo.builder().build();
         }
+
         // 判断其他字段
         Number point2_depth = (Number) jsonObject.getOrDefault("point2_depth",null);
         Number point3_depth = (Number) jsonObject.getOrDefault("point3_depth",null);
@@ -62,12 +65,10 @@ public class ManometerInfoServiceImpl implements ManometerInfoService {
         Number point6_depth = (Number) jsonObject.getOrDefault("point6_depth",null);
 
         if (point2_depth != null) { manometerInfo.setPoint2_depth(point2_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
-        if (point3_depth != null) { manometerInfo.setPoint2_depth(point3_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
-        if (point4_depth != null) { manometerInfo.setPoint2_depth(point4_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
-        if (point5_depth != null) { manometerInfo.setPoint2_depth(point5_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
-        if (point6_depth != null) { manometerInfo.setPoint2_depth(point6_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
-        String in_time = jsonObject.getString("in_time");
-        manometerInfo.setIn_time(in_time);
+        if (point3_depth != null) { manometerInfo.setPoint3_depth(point3_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
+        if (point4_depth != null) { manometerInfo.setPoint4_depth(point4_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
+        if (point5_depth != null) { manometerInfo.setPoint5_depth(point5_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
+        if (point6_depth != null) { manometerInfo.setPoint6_depth(point6_depth.doubleValue()); } else { manometerInfo.setPoint6_depth(null);}
 
         // 其他信息
         manometerInfo.setData_v(1);
