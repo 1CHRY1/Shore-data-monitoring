@@ -21,15 +21,6 @@ import java.util.*;
 @Slf4j
 public class TimeTask {
 
-    @Value("${python}")
-    String python;
-
-    @Value("${DataProcess}")
-    String DataProcess;
-
-    @Value("${DataProcessLog}")
-    String logPath;
-
 //    @Scheduled(cron = "0/5 * * * * *")
 //    @Scheduled(cron = "0 0 12 * * ?")
 //    public void executePythonJiangsu() {

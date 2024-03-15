@@ -6,9 +6,3 @@ spring:
       username: postgres
       password: 123
 
-python:
-  python
-DataProcess:
-  D:/1study/Work/2023_12_22_Storm/Data/DataProcess/
-DataProcessLog:
-  D:/1study/Work/2023_12_22_Storm/Data/DataProcess/logfile.log
