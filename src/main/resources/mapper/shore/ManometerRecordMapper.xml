@@ -3,8 +3,7 @@
 <mapper namespace="nnu.edu.Shore.dao.shore.ManometerRecordMapper">
 
     <insert id="insertManometerRecord" parameterType="nnu.edu.Shore.pojo.ManometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
-        INSERT INTO manometer_record (station_id, machine_id, machine_id_nnu, measure_time, pressure1,
-                                      pressure2, pressure3, pressure4, pressure5, pressure6, in_time)
+        INSERT INTO manometer_record (station_id, machine_id, machine_id_nnu, measure_time, pressure1, pressure2, pressure3, pressure4, pressure5, pressure6, in_time)
         VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{pressure1},
                 #{pressure2}, #{pressure3}, #{pressure4}, #{pressure5}, #{pressure6}, #{in_time})
     </insert>

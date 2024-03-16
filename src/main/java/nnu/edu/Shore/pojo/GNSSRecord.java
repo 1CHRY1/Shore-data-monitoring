@@ -11,6 +11,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,7 +38,7 @@ public class GNSSRecord {
         @NotNull
         String machine_id_nnu; // 设备码别名
         @NotNull
-        String measure_time; // 测量日期
+        Timestamp measure_time; // 测量日期
     }
     @EmbeddedId
     GNSSRecordIdGroup idGroup; // 复合主键
@@ -47,5 +48,5 @@ public class GNSSRecord {
     Double y_move; // y北偏移量
     @NotNull
     Double z_move; // z上偏移量
-    String in_time; // 入库时间
+    Timestamp in_time; // 入库时间
 }

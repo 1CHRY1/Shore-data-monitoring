@@ -2,6 +2,9 @@ package nnu.edu.Shore.service.impl;
 
 import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.SneakyThrows;
+import nnu.edu.Shore.common.utils.DatabaseUtil;
+import nnu.edu.Shore.common.utils.TimeUtil;
 import nnu.edu.Shore.dao.shore.ManometerRecordMapper;
 import nnu.edu.Shore.pojo.InclinometerInfo;
 import nnu.edu.Shore.pojo.Machine;
@@ -10,9 +13,13 @@ import nnu.edu.Shore.pojo.ManometerRecord.ManometerRecordIdGroup;
 import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.ManometerRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -26,13 +33,31 @@ import java.util.List;
 @Service
 public class ManometerRecordServiceImpl implements ManometerRecordService {
 
+    @Value("${spring.datasource.shore.jdbc-url}")
+    String URL;
+
+    @Value("${spring.datasource.shore.username}")
+    String USER;
+
+    @Value("${spring.datasource.shore.password}")
+    String PASSWORD;
+
     @Autowired
     ManometerRecordMapper manometerRecordMapper;
 
     @Autowired
     MachineService machineService;
 
+    @SneakyThrows
     private ManometerRecord dataProccess(JSONObject jsonObject){
+        // 若是一个月的第一分钟，则新建表分区进行存储
+        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        if (currentDate.getDayOfMonth() == 1 && currentTime.getHour() == 0 && currentTime.getMinute() == 0 ) {
+//        if (currentDate.getDayOfMonth() == 16 ) {
+            DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "manometer");
+        }
         // 孔隙水压力计编号为3
         ManometerRecord manometerRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
