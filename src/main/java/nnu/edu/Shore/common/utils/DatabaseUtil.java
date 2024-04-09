@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -27,10 +28,16 @@ public class DatabaseUtil {
     }
 
     // 数据库按月自动分区
-    public static void DBPartition(String url, String user, String password,Timestamp timestamp, String name) {
-        // 为该时间创造一个分区
-        LocalDate Time = timestamp.toLocalDateTime().toLocalDate();
-        LocalDate firstDayOfMonth = Time.withDayOfMonth(1);
+    public static void DBPartition(String url, String user, String password, Timestamp timestamp, String name) {
+        // 判断时间是否为一个月的第一分钟
+        LocalDate Date = timestamp.toLocalDateTime().toLocalDate();
+        LocalTime Time = timestamp.toLocalDateTime().toLocalTime();
+        if (Date.getDayOfMonth() != 1 || Time.getHour() != 0 || Time.getMinute() != 0 ) {
+//        if (Date.getDayOfMonth() == 18 ) {
+            return;
+        }
+        // 若是，则为该时间创造一个分区
+        LocalDate firstDayOfMonth = Date.withDayOfMonth(1);
         String tableName = name + "_record";
         String partitionName = name + "_" + firstDayOfMonth.format(DateTimeFormatter.ofPattern("yyyy_MM"));
 

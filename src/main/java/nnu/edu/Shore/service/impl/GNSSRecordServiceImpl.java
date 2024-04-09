@@ -53,12 +53,7 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     private GNSSRecord dataProcess(JSONObject jsonObject){
         // 若是一个月的第一分钟，则新建表分区进行存储
         Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        if (currentDate.getDayOfMonth() == 1 && currentTime.getHour() == 0 && currentTime.getMinute() == 0 ) {
-//        if (currentDate.getDayOfMonth() == 16 ) {
-            DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "gnss");
-        }
+        DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "gnss");
         // GNSS编号为1
         GNSSRecord gnssRecord;
         String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
