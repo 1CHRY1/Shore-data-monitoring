@@ -1,7 +1,10 @@
 package nnu.edu.Shore.dao.shore;
 
+import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.StresspileInfo;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,9 +18,10 @@ import org.springframework.stereotype.Repository;
 public interface StresspileInfoMapper {
     void insertStresspileInfo(StresspileInfo stresspileInfo);
 
+    List<StresspileInfo> getStresspileInfos();
+
 //    void updateStresspileInfo(StresspileInfo stresspileInfo);
 //
 //    void deleteStresspileInfo(String machine_id_nnu);
 //
-//    void getStresspileInfos();
 }

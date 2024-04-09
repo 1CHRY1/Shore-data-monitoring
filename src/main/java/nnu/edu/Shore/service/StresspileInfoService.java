@@ -20,5 +20,5 @@ public interface StresspileInfoService {
 //
 //    String deleteStresspileInfo(String machine_id_nnu);
 //
-//    List<Machine> getStresspileInfos();
+    List<StresspileInfo> getStresspileInfos();
 }

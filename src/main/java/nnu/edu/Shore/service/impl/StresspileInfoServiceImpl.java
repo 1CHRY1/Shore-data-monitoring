@@ -88,6 +88,11 @@ public class StresspileInfoServiceImpl implements StresspileInfoService {
         return stresspileInfo.getIdGroup().getMachine_id();
     }
 
+    @Override
+    public List<StresspileInfo> getStresspileInfos() {
+        return stresspileInfoMapper.getStresspileInfos();
+    }
+
 //    @Override
 //    public String updateStresspileInfo(StresspileInfo stresspileInfo) {
 //        return null;
@@ -98,8 +103,4 @@ public class StresspileInfoServiceImpl implements StresspileInfoService {
 //        return null;
 //    }
 //
-//    @Override
-//    public List<Machine> getStresspileInfos() {
-//        return null;
-//    }
 }

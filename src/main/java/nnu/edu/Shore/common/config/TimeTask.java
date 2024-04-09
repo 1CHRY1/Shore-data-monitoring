@@ -1,8 +1,12 @@
 package nnu.edu.Shore.common.config;
 
+import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import nnu.edu.Shore.common.utils.ProcessUtil;
-import org.springframework.beans.factory.annotation.Value;
+import nnu.edu.Shore.common.utils.RequestUtil;
+import nnu.edu.Shore.pojo.StresspileInfo;
+import nnu.edu.Shore.service.StresspileInfoService;
+import nnu.edu.Shore.service.StresspileRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,30 +25,24 @@ import java.util.*;
 @Slf4j
 public class TimeTask {
 
-//    @Scheduled(cron = "0/5 * * * * *")
-//    @Scheduled(cron = "0 0 12 * * ?")
-//    public void executePythonJiangsu() {
-//        try {
-//            /**
-//             * @Description:定时获取文件夹数据入库
-//             * @Author: chry
-//             * @Date: 2024/1/10
-//             */
-//            List<String> commands = new ArrayList<>();
-//            commands.add(python);
-//            commands.add(DataProcess + "DataProcess.py");
-//            Process start = ProcessUtil.exeProcess(commands);
-//            ProcessUtil.readProcessOutput(start.getInputStream(), System.out);
-//            start.waitFor();
-//            // 添加日志输出
-//            log.info("Python script execution scheduled at: {}", LocalDateTime.now());
-//            // 创建日志文件
-//            try (PrintWriter writer = new PrintWriter(new FileWriter(logPath, true))) {
-//                writer.println("Log message: Python script execution scheduled at " + LocalDateTime.now());
-//            }
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//        }
-//    }
+    @Autowired
+    StresspileInfoService stresspileInfoService;
 
+    @Autowired
+    StresspileRecordService stresspileRecordService;
+
+//    @Scheduled(cron = "0/1 * * * * ?")
+    public void getStresspileData() {
+        // 定时获取应力桩数据
+        List<StresspileInfo> stresspileInfoList = stresspileInfoService.getStresspileInfos();
+        for (StresspileInfo stresspileInfo : stresspileInfoList) {
+            String url = "http://58.222.103.178:7009/webapi/api/Login/Login";
+            // 获取设备id
+            Map<String, String> requestBody = new HashMap<>();
+            requestBody.put("Username", "ylz");
+            requestBody.put("Password", "ylz@123");
+            JSONObject result = RequestUtil.doPost(url, requestBody);
+            stresspileRecordService.insertStresspileRecord(result);
+        }
+    }
 }

@@ -9,4 +9,8 @@
                 #{point3_depth}, #{point4_depth}, #{point5_depth}, #{point6_depth}, #{in_time}, #{data_v}, #{in_operator}, #{notes})
     </insert>
 
+    <select id="getStresspileInfos" resultType="nnu.edu.Shore.pojo.StresspileInfo">
+        SELECT * FROM stresspile_info
+    </select>
+
 </mapper>
