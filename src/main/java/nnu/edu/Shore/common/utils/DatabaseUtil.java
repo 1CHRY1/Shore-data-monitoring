@@ -39,7 +39,7 @@ public class DatabaseUtil {
         // 若是，则为该时间创造一个分区
         LocalDate firstDayOfMonth = Date.withDayOfMonth(1);
         String tableName = name + "_record";
-        String partitionName = name + "_" + firstDayOfMonth.format(DateTimeFormatter.ofPattern("yyyy_MM"));
+        String partitionName = name + "_" + firstDayOfMonth.format(DateTimeFormatter.ofPattern("yyyyMM"));
 
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             boolean partitionExists = checkPartitionExists(connection, tableName, partitionName);

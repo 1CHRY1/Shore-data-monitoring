@@ -30,4 +30,21 @@ public class GNSSRecordController {
         return ResultUtils.success(gnssRecordService.insertGNSSRecord(jsonObject));
     }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public JsonResult getAllGNSSRecord() {
+        // 获取所有GNSS设备数据
+        return ResultUtils.success(gnssRecordService.getAllGNSSRecord());
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public JsonResult getGNSSRecordCount() {
+        // 获取所有GNSS记录数量
+        return ResultUtils.success(gnssRecordService.getGNSSRecordCount());
+    }
+
+    @RequestMapping(value = "/latesttime", method = RequestMethod.GET)
+    public JsonResult getLatestTime() {
+        // 获取最近一次数据的录入时间
+        return ResultUtils.success(gnssRecordService.getLatestTime());
+    }
 }

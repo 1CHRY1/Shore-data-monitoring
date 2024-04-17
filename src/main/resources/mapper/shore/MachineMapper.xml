@@ -12,6 +12,10 @@
         SELECT * from machine where machine_id=#{machine_id} and type=#{type}
     </select>
 
+    <select id="getMachineCount" resultType="integer">
+        SELECT Count(*) from machine where type=#{type}
+    </select>
+
 <!--    <update id="updateStation" parameterType="nnu.edu.Shore.pojo.Station">-->
 <!--        UPDATE station-->
 <!--        SET-->

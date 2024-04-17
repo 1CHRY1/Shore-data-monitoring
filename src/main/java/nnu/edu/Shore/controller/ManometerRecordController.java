@@ -32,4 +32,22 @@ public class ManometerRecordController {
         // 插入压力计设备记录数据
         return ResultUtils.success(manometerRecordService.insertManometerRecord(jsonObject));
     }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public JsonResult getAllGNSSRecord() {
+        // 获取所有压力计记录数据
+        return ResultUtils.success(manometerRecordService.getAllManometerRecord());
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public JsonResult getGNSSRecordCount() {
+        // 获取所有压力计记录数量
+        return ResultUtils.success(manometerRecordService.getManometerRecordCount());
+    }
+
+    @RequestMapping(value = "/latesttime", method = RequestMethod.GET)
+    public JsonResult getLatestTime() {
+        // 获取最近一次数据的录入时间
+        return ResultUtils.success(manometerRecordService.getLatestTime());
+    }
 }

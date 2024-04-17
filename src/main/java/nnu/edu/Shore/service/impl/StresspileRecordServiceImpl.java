@@ -6,10 +6,7 @@ import lombok.SneakyThrows;
 import nnu.edu.Shore.common.utils.DatabaseUtil;
 import nnu.edu.Shore.common.utils.TimeUtil;
 import nnu.edu.Shore.dao.shore.StresspileRecordMapper;
-import nnu.edu.Shore.pojo.InclinometerInfo;
-import nnu.edu.Shore.pojo.Machine;
-import nnu.edu.Shore.pojo.ManometerRecord;
-import nnu.edu.Shore.pojo.StresspileRecord;
+import nnu.edu.Shore.pojo.*;
 import nnu.edu.Shore.pojo.StresspileRecord.StresspileRecordIdGroup;
 import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.StresspileRecordService;
@@ -21,6 +18,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -52,11 +50,11 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
     @SneakyThrows
     private StresspileRecord dataProcess(JSONObject jsonObject){
         // 若是一个月的第一分钟，则新建表分区进行存储
-        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
+        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
         DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "stresspile");
         // 应力桩编号为2
         StresspileRecord stresspileRecord;
-        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id = jsonObject.getString("device_id");
         JSONObject machineInfo = machineService.getMachineInfo(machine_id,'2');
         if (machineInfo == null) {
             return null;
@@ -70,47 +68,22 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
                             .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
-                            .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
+                            .measure_time(measure_time)
                             .build())
-                    .horizontal1(jsonObject.getDouble("horizontal1"))
-                    .horizontal_stress1(jsonObject.getDouble("horizontal_stress1"))
-                    .vertical_stress1(jsonObject.getDouble("vertical_stress1"))
-                    .in_time(LocalDateTime.now().toString())
+                    .top_angle(jsonObject.getJSONObject("param_value").getDouble("top_angle"))
+                    .middle_angle(jsonObject.getJSONObject("param_value").getDouble("middle_angle"))
+                    .bottom_angle(jsonObject.getJSONObject("param_value").getDouble("bottom_angle"))
+                    .top_power(jsonObject.getJSONObject("param_value").getDouble("top_angle"))
+                    .middle_power(jsonObject.getJSONObject("param_value").getDouble("middle_power"))
+                    .bottom_power(jsonObject.getJSONObject("param_value").getDouble("bottom_power"))
+                    .top_change(jsonObject.getJSONObject("param_value").getDouble("top_change"))
+                    .middle_change(jsonObject.getJSONObject("param_value").getDouble("middle_change"))
+                    .bottom_change(jsonObject.getJSONObject("param_value").getDouble("bottom_change"))
+                    .in_time(TimeUtil.String2Timestamp(LocalDateTime.now().toString()))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return StresspileRecord.builder().build();
         }
-        // 判断其他字段
-        Number horizontal2 = (Number) jsonObject.getOrDefault("horizontal2",null);
-        Number horizontal_stress2 = (Number) jsonObject.getOrDefault("horizontal_stress2",null);
-        Number vertical_stress2 = (Number) jsonObject.getOrDefault("vertical_stress2",null);
-        Number horizontal3 = (Number) jsonObject.getOrDefault("horizontal3",null);
-        Number horizontal_stress3 = (Number) jsonObject.getOrDefault("horizontal_stress3",null);
-        Number vertical_stress3 = (Number) jsonObject.getOrDefault("vertical_stress3",null);
-        Number horizontal4 = (Number) jsonObject.getOrDefault("horizontal4",null);
-        Number horizontal_stress4 = (Number) jsonObject.getOrDefault("horizontal_stress4",null);
-        Number vertical_stress4 = (Number) jsonObject.getOrDefault("vertical_stress4",null);
-        Number horizontal5 = (Number) jsonObject.getOrDefault("horizontal5",null);
-        Number horizontal_stress5 = (Number) jsonObject.getOrDefault("horizontal_stress5",null);
-        Number vertical_stress5 = (Number) jsonObject.getOrDefault("vertical_stress5",null);
-        Number horizontal6 = (Number) jsonObject.getOrDefault("horizontal6",null);
-        Number horizontal_stress6 = (Number) jsonObject.getOrDefault("horizontal_stress6",null);
-        Number vertical_stress6 = (Number) jsonObject.getOrDefault("vertical_stress6",null);
-        if (horizontal2 != null) { stresspileRecord.setHorizontal2(horizontal2.doubleValue()); } else { stresspileRecord.setHorizontal2(null);}
-        if (horizontal_stress2 != null) { stresspileRecord.setHorizontal_stress2(horizontal_stress2.doubleValue()); } else { stresspileRecord.setHorizontal2(null);}
-        if (vertical_stress2 != null) { stresspileRecord.setVertical_stress2(vertical_stress2.doubleValue()); } else { stresspileRecord.setVertical_stress2(null);}
-        if (horizontal3 != null) { stresspileRecord.setHorizontal3(horizontal3.doubleValue()); } else { stresspileRecord.setHorizontal3(null);}
-        if (horizontal_stress3 != null) { stresspileRecord.setHorizontal_stress3(horizontal_stress3.doubleValue()); } else { stresspileRecord.setHorizontal3(null);}
-        if (vertical_stress3 != null) { stresspileRecord.setVertical_stress3(vertical_stress3.doubleValue()); } else { stresspileRecord.setVertical_stress3(null);}
-        if (horizontal4 != null) { stresspileRecord.setHorizontal4(horizontal4.doubleValue()); } else { stresspileRecord.setHorizontal4(null);}
-        if (horizontal_stress4 != null) { stresspileRecord.setHorizontal_stress4(horizontal_stress4.doubleValue()); } else { stresspileRecord.setHorizontal4(null);}
-        if (vertical_stress4 != null) { stresspileRecord.setVertical_stress4(vertical_stress4.doubleValue()); } else { stresspileRecord.setVertical_stress4(null);}
-        if (horizontal5 != null) { stresspileRecord.setHorizontal5(horizontal5.doubleValue()); } else { stresspileRecord.setHorizontal5(null);}
-        if (horizontal_stress5 != null) { stresspileRecord.setHorizontal_stress5(horizontal_stress5.doubleValue()); } else { stresspileRecord.setHorizontal5(null);}
-        if (vertical_stress5 != null) { stresspileRecord.setVertical_stress5(vertical_stress5.doubleValue()); } else { stresspileRecord.setVertical_stress5(null);}
-        if (horizontal6 != null) { stresspileRecord.setHorizontal6(horizontal6.doubleValue()); } else { stresspileRecord.setHorizontal6(null);}
-        if (horizontal_stress6 != null) { stresspileRecord.setHorizontal_stress6(horizontal_stress6.doubleValue()); } else { stresspileRecord.setHorizontal6(null);}
-        if (vertical_stress6 != null) { stresspileRecord.setVertical_stress6(vertical_stress6.doubleValue()); } else { stresspileRecord.setVertical_stress6(null);}
 
         return stresspileRecord;
     }
@@ -123,6 +96,28 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         }
         stresspileRecordMapper.insertStresspileRecord(stresspileRecord);
         return stresspileRecord.getIdGroup().getMachine_id();
+    }
+
+    @Override
+    public List<StresspileRecord> getAllStresspileRecord() {
+        // 获取所有Stresspile记录数据
+        return stresspileRecordMapper.getAllStresspileRecord();
+    }
+
+    @Override
+    public Integer getStresspileRecordCount() {
+        return stresspileRecordMapper.getStresspileRecordCount();
+    }
+
+    @Override
+    public String getLatestTime() {
+        StresspileRecord stresspileRecord = stresspileRecordMapper.getLatestRecord();
+        if ( stresspileRecord == null ) {
+            return "当前无记录";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = stresspileRecord.getIn_time().toLocalDateTime();
+        return time.format(formatter);
     }
 
 //    @Override

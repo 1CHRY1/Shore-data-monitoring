@@ -6,8 +6,6 @@ import lombok.SneakyThrows;
 import nnu.edu.Shore.common.utils.DatabaseUtil;
 import nnu.edu.Shore.common.utils.TimeUtil;
 import nnu.edu.Shore.dao.shore.ManometerRecordMapper;
-import nnu.edu.Shore.pojo.InclinometerInfo;
-import nnu.edu.Shore.pojo.Machine;
 import nnu.edu.Shore.pojo.ManometerRecord;
 import nnu.edu.Shore.pojo.ManometerRecord.ManometerRecordIdGroup;
 import nnu.edu.Shore.service.MachineService;
@@ -17,9 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -51,11 +48,11 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
     @SneakyThrows
     private ManometerRecord dataProccess(JSONObject jsonObject){
         // 若是一个月的第一分钟，则新建表分区进行存储
-        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
+        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
         DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "manometer");
         // 孔隙水压力计编号为3
         ManometerRecord manometerRecord;
-        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id = jsonObject.getString("device_id");
         JSONObject machineInfo = machineService.getMachineInfo(machine_id, '3');
         if (machineInfo == null) {
             return null;
@@ -69,25 +66,16 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
                             .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
-                            .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
+                            .measure_time(measure_time)
                             .build())
-                    .in_time(LocalDateTime.now().toString())
-                    .pressure1(jsonObject.getDouble("pressure1"))
+                    .zx(jsonObject.getJSONObject("param_value").getDouble("zx"))
+                    .wd(jsonObject.getJSONObject("param_value").getDouble("wd"))
+                    .swgc(jsonObject.getJSONObject("param_value").getDouble("swgc"))
+                    .in_time(TimeUtil.String2Timestamp(LocalDateTime.now().toString()))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return ManometerRecord.builder().build();
         }
-        // 判断其他字段
-        Number pressure2 = (Number) jsonObject.getOrDefault("pressure2",null);
-        Number pressure3 = (Number) jsonObject.getOrDefault("pressure3",null);
-        Number pressure4 = (Number) jsonObject.getOrDefault("pressure4",null);
-        Number pressure5 = (Number) jsonObject.getOrDefault("pressure5",null);
-        Number pressure6 = (Number) jsonObject.getOrDefault("pressure6",null);
-        if (pressure2 != null) { manometerRecord.setPressure2(pressure2.doubleValue()); } else { manometerRecord.setPressure2(null);}
-        if (pressure3 != null) { manometerRecord.setPressure3(pressure3.doubleValue()); } else { manometerRecord.setPressure3(null);}
-        if (pressure4 != null) { manometerRecord.setPressure4(pressure4.doubleValue()); } else { manometerRecord.setPressure4(null);}
-        if (pressure5 != null) { manometerRecord.setPressure5(pressure5.doubleValue()); } else { manometerRecord.setPressure5(null);}
-        if (pressure6 != null) { manometerRecord.setPressure6(pressure6.doubleValue()); } else { manometerRecord.setPressure6(null);}
 
         return manometerRecord;
     }
@@ -100,6 +88,27 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         }
         manometerRecordMapper.insertManometerRecord(manometerRecord);
         return manometerRecord.getIdGroup().getMachine_id();
+    }
+
+    @Override
+    public List<ManometerRecord> getAllManometerRecord() {
+        return manometerRecordMapper.getAllManometerRecord();
+    }
+
+    @Override
+    public Integer getManometerRecordCount() {
+        return manometerRecordMapper.getManometerRecordCount();
+    }
+
+    @Override
+    public String getLatestTime() {
+        ManometerRecord manometerRecord = manometerRecordMapper.getLatestRecord();
+        if ( manometerRecord == null ) {
+            return "当前无记录";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = manometerRecord.getIn_time().toLocalDateTime();
+        return time.format(formatter);
     }
 
 //    @Override

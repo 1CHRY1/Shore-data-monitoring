@@ -32,4 +32,22 @@ public class inclinometerRecordController {
         // 插入测斜仪设备记录数据
         return ResultUtils.success(inclinometerRecordService.insertInclinometerRecord(jsonObject));
     }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public JsonResult getAllInclinometerRecord() {
+        // 获取所有测斜设备数据
+        return ResultUtils.success(inclinometerRecordService.getAllInclinometerRecord());
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public JsonResult getInclinometerRecordCount() {
+        // 获取所有测斜记录数量
+        return ResultUtils.success(inclinometerRecordService.getInclinometerRecordCount());
+    }
+
+    @RequestMapping(value = "/latesttime", method = RequestMethod.GET)
+    public JsonResult getLatestTime() {
+        // 获取最近一次数据的录入时间
+        return ResultUtils.success(inclinometerRecordService.getLatestTime());
+    }
 }

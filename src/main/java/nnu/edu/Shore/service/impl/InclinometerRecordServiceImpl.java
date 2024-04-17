@@ -7,6 +7,7 @@ import nnu.edu.Shore.common.utils.DatabaseUtil;
 import nnu.edu.Shore.common.utils.TimeUtil;
 import nnu.edu.Shore.dao.shore.InclinometerInfoMapper;
 import nnu.edu.Shore.dao.shore.InclinometerRecordMapper;
+import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.InclinometerInfo;
 import nnu.edu.Shore.pojo.InclinometerRecord;
 import nnu.edu.Shore.pojo.InclinometerRecord.InclinometerRecordIdGroup;
@@ -24,6 +25,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -53,14 +55,13 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
     MachineService machineService;
 
     @SneakyThrows
-
     private InclinometerRecord dataProcess(JSONObject jsonObject){
         // 若是一个月的第一分钟，则新建表分区进行存储
-        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
+        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
         DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "inclinometer");
         // 测斜仪编号为4
         InclinometerRecord inclinometerRecord;
-        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id = jsonObject.getString("device_id");
         JSONObject machineInfo = machineService.getMachineInfo(machine_id,'4');
         if (machineInfo == null) {
             return null;
@@ -74,36 +75,19 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
                             .station_id(station_id)
                             .machine_id(machine_id)
                             .machine_id_nnu(machine_id_nnu)
-                            .measure_time(jsonObject.getJSONObject("idGroup").getString("measure_time"))
+                            .measure_time(measure_time)
                             .build())
-                    .x_move1(jsonObject.getDouble("x_move1"))
-                    .y_move1(jsonObject.getDouble("y_move1"))
-                    .in_time(LocalDateTime.now().toString())
+                    .top_move(jsonObject.getJSONObject("param_value").getDouble("ding_wy"))
+                    .middle_move(jsonObject.getJSONObject("param_value").getDouble("zhong_wy"))
+                    .bottom_move(jsonObject.getJSONObject("param_value").getDouble("di_wy"))
+                    .top_move_24h(jsonObject.getJSONObject("param_value").getDouble("ding_wy_24h"))
+                    .middle_move_24h(jsonObject.getJSONObject("param_value").getDouble("zhong_wy_24h"))
+                    .bottom_move_24h(jsonObject.getJSONObject("param_value").getDouble("di_wy_24h"))
+                    .in_time(TimeUtil.String2Timestamp(LocalDateTime.now().toString()))
                     .build();
         } catch (JSONException | NumberFormatException | NullPointerException e) {
             return InclinometerRecord.builder().build();
         }
-        // 判断其他字段
-        Number x_move2 = (Number) jsonObject.getOrDefault("x_move2",null);
-        Number y_move2 = (Number) jsonObject.getOrDefault("y_move2",null);
-        Number x_move3 = (Number) jsonObject.getOrDefault("x_move3",null);
-        Number y_move3 = (Number) jsonObject.getOrDefault("y_move3",null);
-        Number x_move4 = (Number) jsonObject.getOrDefault("x_move4",null);
-        Number y_move4 = (Number) jsonObject.getOrDefault("y_move4",null);
-        Number x_move5 = (Number) jsonObject.getOrDefault("x_move5",null);
-        Number y_move5 = (Number) jsonObject.getOrDefault("y_move5",null);
-        Number x_move6 = (Number) jsonObject.getOrDefault("x_move6",null);
-        Number y_move6 = (Number) jsonObject.getOrDefault("y_move6",null);
-        if (x_move2 != null) {inclinometerRecord.setX_move2(x_move2.doubleValue());} else {inclinometerRecord.setX_move2(null);}
-        if (y_move2 != null) {inclinometerRecord.setY_move2(y_move2.doubleValue());} else {inclinometerRecord.setY_move2(null);}
-        if (x_move3 != null) {inclinometerRecord.setX_move3(x_move3.doubleValue());} else {inclinometerRecord.setX_move3(null);}
-        if (y_move3 != null) {inclinometerRecord.setY_move3(y_move3.doubleValue());} else {inclinometerRecord.setY_move3(null);}
-        if (x_move4 != null) {inclinometerRecord.setX_move4(x_move4.doubleValue());} else {inclinometerRecord.setX_move4(null);}
-        if (y_move4 != null) {inclinometerRecord.setY_move4(y_move4.doubleValue());} else {inclinometerRecord.setY_move4(null);}
-        if (x_move5 != null) {inclinometerRecord.setX_move5(x_move5.doubleValue());} else {inclinometerRecord.setX_move5(null);}
-        if (y_move5 != null) {inclinometerRecord.setY_move5(y_move5.doubleValue());} else {inclinometerRecord.setY_move5(null);}
-        if (x_move6 != null) {inclinometerRecord.setX_move6(x_move6.doubleValue());} else {inclinometerRecord.setX_move6(null);}
-        if (y_move6 != null) {inclinometerRecord.setY_move6(y_move6.doubleValue());} else {inclinometerRecord.setY_move6(null);}
 
         return inclinometerRecord;
     }
@@ -117,6 +101,27 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         return inclinometerRecord.getIdGroup().getMachine_id();
     }
 
+    @Override
+    public List<InclinometerRecord> getAllInclinometerRecord() {
+        // 获取所有测斜记录数据
+        return inclinometerRecordMapper.getAllInclinometerRecord();
+    }
+
+    @Override
+    public Integer getInclinometerRecordCount() {
+        return inclinometerRecordMapper.getInclinometerRecordCount();
+    }
+
+    @Override
+    public String getLatestTime() {
+        InclinometerRecord inclinometerRecord = inclinometerRecordMapper.getLatestRecord();
+        if ( inclinometerRecord == null ) {
+            return "当前无记录";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = inclinometerRecord.getIn_time().toLocalDateTime();
+        return time.format(formatter);
+    }
 //    @Override
 //    public String updateInclinometerRecord(InclinometerRecord inclinometerRecord) {
 //        return null;

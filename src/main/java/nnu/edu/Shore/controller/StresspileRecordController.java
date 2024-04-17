@@ -32,4 +32,22 @@ public class StresspileRecordController {
         // 插入应力桩设备信记录数据
         return ResultUtils.success(stresspileRecordService.insertStresspileRecord(jsonObject));
     }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public JsonResult getAllStresspileRecord() {
+        // 获取所有Stresspile设备数据
+        return ResultUtils.success(stresspileRecordService.getAllStresspileRecord());
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public JsonResult getStresspileRecordCount() {
+        // 获取所有Stresspile记录数量
+        return ResultUtils.success(stresspileRecordService.getStresspileRecordCount());
+    }
+
+    @RequestMapping(value = "/latesttime", method = RequestMethod.GET)
+    public JsonResult getLatestTime() {
+        // 获取最近一次数据的录入时间
+        return ResultUtils.success(stresspileRecordService.getLatestTime());
+    }
 }

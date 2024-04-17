@@ -1,8 +1,11 @@
 package nnu.edu.Shore.dao.shore;
 
+import nnu.edu.Shore.pojo.StresspileRecord;
 import nnu.edu.Shore.pojo.StresspileInfo;
 import nnu.edu.Shore.pojo.StresspileRecord;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +17,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StresspileRecordMapper {
     void insertStresspileRecord(StresspileRecord stresspileRecord);
+
+    List<StresspileRecord> getAllStresspileRecord();
+
+    Integer getStresspileRecordCount();
+
+    StresspileRecord getLatestRecord();
 
 //    void updateStresspileRecord(StresspileRecord stresspileRecord);
 //

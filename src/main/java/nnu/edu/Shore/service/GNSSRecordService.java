@@ -1,9 +1,12 @@
 package nnu.edu.Shore.service;
 
 import com.alibaba.fastjson2.JSONObject;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.Machine;
 
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -15,6 +18,12 @@ import java.util.List;
  */
 public interface GNSSRecordService {
     String insertGNSSRecord(JSONObject jsonObject);
+
+    List<GNSSRecord> getAllGNSSRecord();
+
+    Integer getGNSSRecordCount();
+
+    String getLatestTime();
 
 //    String updateGNSSRecord(GNSSRecord gnssRecord);
 //

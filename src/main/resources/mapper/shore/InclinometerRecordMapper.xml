@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nnu.edu.Shore.dao.shore.InclinometerRecordMapper">
-
+    <resultMap id="inclinometerRecordMap" type="nnu.edu.Shore.pojo.InclinometerRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="top_move" column="top_move"/>
+        <result property="middle_move" column="middle_move"/>
+        <result property="bottom_move" column="bottom_move"/>
+        <result property="top_move_24h" column="top_move_24h"/>
+        <result property="middle_move_24h" column="middle_move_24h"/>
+        <result property="bottom_move_24h" column="bottom_move_24h"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
     <insert id="insertInclinometerRecord" parameterType="nnu.edu.Shore.pojo.InclinometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
-        INSERT INTO inclinometer_record (station_id, machine_id, machine_id_nnu, measure_time,x_move1, y_move1, x_move2, y_move2,
-                                         x_move3, y_move3, x_move4, y_move4, x_move5, y_move5, x_move6, y_move6, in_time)
-        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{x_move1}, #{y_move1}, #{x_move2},
-                #{y_move2}, #{x_move3}, #{y_move3}, #{x_move4}, #{y_move4}, #{x_move5}, #{y_move5}, #{x_move6}, #{y_move6}, #{in_time})
+        INSERT INTO inclinometer_record (station_id, machine_id, machine_id_nnu, measure_time, top_move, middle_move, bottom_move, top_move_24h,
+                                         middle_move_24h, bottom_move_24h, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{top_move}, #{middle_move}, #{bottom_move},
+                #{top_move_24h}, #{middle_move_24h}, #{bottom_move_24h}, #{in_time})
     </insert>
-
+    <select id="getAllInclinometerRecord" resultMap="inclinometerRecordMap">
+        SELECT * from inclinometer_record ORDER BY in_time DESC LIMIT 100
+    </select>
+    <select id="getInclinometerRecordCount" resultType="integer">
+        SELECT COUNT(*) from inclinometer_record
+    </select>
+    <select id="getLatestRecord" resultType="nnu.edu.Shore.pojo.InclinometerRecord">
+        SELECT * FROM inclinometer_record ORDER BY in_time DESC LIMIT 1;
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,23 +32,19 @@ public class ManometerRecord {
     @Embeddable
     @Builder
     public static class ManometerRecordIdGroup implements Serializable{
-        @NotNull
+        @Nonnull
         String station_id; // 站码
-        @NotNull
+        @Nonnull
         String machine_id; //设备码
-        @NotNull
+        @Nonnull
         String machine_id_nnu; // 设备码别名
-        @NotNull
-        String measure_time; // 测量时间
+        @Nonnull
+        Timestamp measure_time; // 测量时间
     }
     @EmbeddedId
     ManometerRecordIdGroup idGroup;
-    @NotNull
-    Double pressure1; // 第1传感器数值
-    Double pressure2; // 第2传感器数值
-    Double pressure3; // 第3传感器数值
-    Double pressure4; // 第4传感器数值
-    Double pressure5; // 第5传感器数值
-    Double pressure6; // 第6传感器数值
-    String in_time; // 入库时间
+    Double zx; // 频率
+    Double wd; // 温度
+    Double swgc; // 水位高程
+    Timestamp in_time; // 入库时间
 }

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nnu.edu.Shore.dao.shore.ManometerRecordMapper">
-
+    <resultMap id="manometerRecordMap" type="nnu.edu.Shore.pojo.ManometerRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="zx" column="zx"/>
+        <result property="wd" column="wd"/>
+        <result property="swgc" column="swgc"/>
+    </resultMap>
     <insert id="insertManometerRecord" parameterType="nnu.edu.Shore.pojo.ManometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
-        INSERT INTO manometer_record (station_id, machine_id, machine_id_nnu, measure_time, pressure1, pressure2, pressure3, pressure4, pressure5, pressure6, in_time)
-        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{pressure1},
-                #{pressure2}, #{pressure3}, #{pressure4}, #{pressure5}, #{pressure6}, #{in_time})
+        INSERT INTO manometer_record (station_id, machine_id, machine_id_nnu, measure_time, zx, wd, swgc, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{zx},
+                #{wd}, #{swgc}, #{in_time})
     </insert>
-
+    <select id="getAllManometerRecord" resultMap="manometerRecordMap">
+        SELECT * from manometer_record ORDER BY in_time DESC LIMIT 100
+    </select>
+    <select id="getManometerRecordCount" resultType="integer">
+        SELECT COUNT(*) from manometer_record
+    </select>
+    <select id="getLatestRecord" resultType="nnu.edu.Shore.pojo.ManometerRecord">
+        SELECT * FROM manometer_record ORDER BY in_time DESC LIMIT 1;
+    </select>
 </mapper>

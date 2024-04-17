@@ -35,4 +35,10 @@ public class MachineController {
         // 通过设备标识码获取设备信息
         return ResultUtils.success(machineService.getMachineInfo(machine_id, type));
     }
+
+    @GetMapping(value="/count")
+    public JsonResult getMachineCount(@RequestParam Character type) {
+        // 通过设备标识码获取设备数量
+        return ResultUtils.success(machineService.getMachineCount(type));
+    }
 }

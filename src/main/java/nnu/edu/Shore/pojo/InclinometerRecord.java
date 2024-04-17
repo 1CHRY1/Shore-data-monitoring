@@ -1,6 +1,7 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,30 +30,22 @@ public class InclinometerRecord {
     @Embeddable
     @Builder
     public static class InclinometerRecordIdGroup implements Serializable {
-        @NotNull
+        @Nonnull
         String station_id; // 站码
-        @NotNull
+        @Nonnull
         String machine_id; //设备码
-        @NotNull
+        @Nonnull
         String machine_id_nnu; // 设备码别名
-        @NotNull
-        String measure_time; // 测量时间
+        @Nonnull
+        Timestamp measure_time; // 测量时间
     }
     @EmbeddedId
     InclinometerRecordIdGroup idGroup;
-    @NotNull
-    Double x_move1; // 第1传感器x向偏移量
-    @NotNull
-    Double y_move1; // 第1传感器y向偏移量
-    Double x_move2; // 第2传感器x向偏移量
-    Double y_move2; // 第2传感器y向偏移量
-    Double x_move3; // 第3传感器x向偏移量
-    Double y_move3; // 第3传感器y向偏移量
-    Double x_move4; // 第4传感器x向偏移量
-    Double y_move4; // 第4传感器y向偏移量
-    Double x_move5; // 第5传感器x向偏移量
-    Double y_move5; // 第5传感器y向偏移量
-    Double x_move6; // 第6传感器x向偏移量
-    Double y_move6; // 第6传感器y向偏移量
-    String in_time; // 入库时间
+    Double top_move; // 顶部累计位移
+    Double middle_move; // 中部累计位移
+    Double bottom_move; // 底部累计位移
+    Double top_move_24h; // 顶部24小时累计位移
+    Double middle_move_24h; // 中部24小时累计位移
+    Double bottom_move_24h; // 底部24小时累计位移
+    Timestamp in_time; // 入库时间
 }

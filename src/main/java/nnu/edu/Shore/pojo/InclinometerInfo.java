@@ -1,6 +1,7 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,18 +32,18 @@ public class InclinometerInfo {
     @Embeddable
     @Builder
     public static class InclinometerInfoIdGroup implements Serializable {
-        @NotNull
+        @Nonnull
         String station_id; // 站码
-        @NotNull
+        @Nonnull
         String machine_id; //设备码
-        @NotNull
+        @Nonnull
         String machine_id_nnu; // 设备码别名
     }
     @EmbeddedId
     InclinometerInfoIdGroup idGroup; // 复合主键
-    @NotNull
+    @Nonnull
     Integer point_num; // 传感器个数
-    @NotNull
+    @Nonnull
     Double point1_depth; // 传感器1深度
     Double point2_depth; // 传感器2深度
     Double point3_depth; // 传感器3深度

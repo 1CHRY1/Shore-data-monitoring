@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -52,11 +53,11 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
     @SneakyThrows
     private GNSSRecord dataProcess(JSONObject jsonObject){
         // 若是一个月的第一分钟，则新建表分区进行存储
-        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getJSONObject("idGroup").getString("measure_time"));
+        Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
         DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "gnss");
         // GNSS编号为1
         GNSSRecord gnssRecord;
-        String machine_id = jsonObject.getJSONObject("idGroup").getString("machine_id");
+        String machine_id = jsonObject.getString("device_id");
         JSONObject machineInfo = machineService.getMachineInfo(machine_id,'1');
         if (machineInfo == null) {
             return null;
@@ -73,16 +74,19 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
                                     .machine_id_nnu(machine_id_nnu)
                                     .measure_time(measure_time)
                                     .build())
-                    .x_move(jsonObject.getDouble("x_move"))
-                    .y_move(jsonObject.getDouble("y_move"))
-                    .z_move(jsonObject.getDouble("z_move"))
+                    .x_move(jsonObject.getJSONObject("param_value").getDouble("x"))
+                    .y_move(jsonObject.getJSONObject("param_value").getDouble("y"))
+                    .z_move(jsonObject.getJSONObject("param_value").getDouble("z"))
                     .in_time(TimeUtil.String2Timestamp(LocalDateTime.now().toString()))
                     .build();
         }
         catch (JSONException | NumberFormatException | NullPointerException | ParseException e) {
             return GNSSRecord.builder().build();
         }
-
+        Number threeD = jsonObject.getJSONObject("param_value").getDouble("3d");
+        Number threeDF = jsonObject.getJSONObject("param_value").getDouble("3d_5h");
+        if (threeD != null) {gnssRecord.setThreeD(threeD.doubleValue());} else {gnssRecord.setThreeD(null);}
+        if (threeDF != null) {gnssRecord.setThreeDF(threeDF.doubleValue());} else {gnssRecord.setThreeDF(null);}
         return gnssRecord;
     }
 
@@ -96,6 +100,28 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
         }
         gnssRecordMapper.insertGNSSRecord(gnssRecord);
         return gnssRecord.getIdGroup().getMachine_id();
+    }
+
+    @Override
+    public List<GNSSRecord> getAllGNSSRecord() {
+        // 获取所有GNSS记录数据
+        return gnssRecordMapper.getAllGNSSRecord();
+    }
+
+    @Override
+    public Integer getGNSSRecordCount() {
+        return gnssRecordMapper.getGNSSRecordCount();
+    }
+
+    @Override
+    public String getLatestTime() {
+        GNSSRecord gnssRecord = gnssRecordMapper.getLatestRecord();
+        if ( gnssRecord == null ) {
+            return "当前无记录";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = gnssRecord.getIn_time().toLocalDateTime();
+        return time.format(formatter);
     }
 
 //    @Override

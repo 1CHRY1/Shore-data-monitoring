@@ -4,6 +4,10 @@ import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.Machine;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -15,6 +19,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GNSSRecordMapper {
     void insertGNSSRecord(GNSSRecord gnssRecord);
+
+    List<GNSSRecord> getAllGNSSRecord();
+
+    Integer getGNSSRecordCount();
+
+    GNSSRecord getLatestRecord();
 
 //    void updateGNSSRecord(Machine gnssRecord);
 //

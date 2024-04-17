@@ -77,6 +77,11 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.getMachineInfo(machine_id, type);
     }
 
+    @Override
+    public Integer getMachineCount(Character type) {
+        return machineMapper.getMachineCount(type);
+    }
+
 //    @Override
 //    public String updateMachine(Machine machine) {
 //        return null;

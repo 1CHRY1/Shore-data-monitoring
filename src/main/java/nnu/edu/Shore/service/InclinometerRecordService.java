@@ -1,6 +1,7 @@
 package nnu.edu.Shore.service;
 
 import com.alibaba.fastjson2.JSONObject;
+import nnu.edu.Shore.pojo.GNSSRecord;
 import nnu.edu.Shore.pojo.InclinometerInfo;
 import nnu.edu.Shore.pojo.InclinometerRecord;
 import nnu.edu.Shore.pojo.Machine;
@@ -16,6 +17,12 @@ import java.util.List;
  */
 public interface InclinometerRecordService {
     String insertInclinometerRecord(JSONObject jsonObject);
+
+    List<InclinometerRecord> getAllInclinometerRecord();
+
+    Integer getInclinometerRecordCount();
+
+    String getLatestTime();
 
 //    String updateInclinometerRecord(InclinometerRecord inclinometerRecord);
 //

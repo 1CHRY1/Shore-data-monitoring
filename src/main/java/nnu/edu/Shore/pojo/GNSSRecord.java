@@ -1,10 +1,9 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
+
+import lombok.*;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 
 import javax.persistence.Embeddable;
@@ -31,22 +30,24 @@ public class GNSSRecord {
     @NoArgsConstructor
     @Builder
     public static class GNSSRecordIdGroup implements Serializable {
-        @NotNull
+        @Nonnull
         String station_id; // 站码
-        @NotNull
+        @Nonnull
         String machine_id; //设备码
-        @NotNull
+        @Nonnull
         String machine_id_nnu; // 设备码别名
-        @NotNull
+        @Nonnull
         Timestamp measure_time; // 测量日期
     }
     @EmbeddedId
     GNSSRecordIdGroup idGroup; // 复合主键
-    @NotNull
+    @Nonnull
     Double x_move; // x东偏移量
-    @NotNull
+    @Nonnull
     Double y_move; // y北偏移量
-    @NotNull
+    @Nonnull
     Double z_move; // z上偏移量
+    Double threeD; // 3D累计位移
+    Double threeDF; // 5小时3D相对变化量
     Timestamp in_time; // 入库时间
 }

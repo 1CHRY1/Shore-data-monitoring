@@ -1,6 +1,7 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,11 +20,11 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 @NoArgsConstructor
 @Builder
 public class Station {
-    @NotNull
+    @Nonnull
     String station_id; // 站码
-    @NotNull
+    @Nonnull
     String begin_time; // 开始日期
-    @NotNull
+    @Nonnull
     String end_time; // 结束时间
     String operate_time; // 操作时间
     String operator; // 操作人

@@ -1,6 +1,7 @@
 package nnu.edu.Shore.pojo;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,25 +31,25 @@ public class Machine {
     @NoArgsConstructor
     @Builder
     public static class MachineIdGroup implements Serializable {
-        @NotNull
+        @Nonnull
         String station_id; // 站码
-        @NotNull
+        @Nonnull
         String machine_id; //设备码
         String machine_id_nnu; // 设备码别名
     }
     @EmbeddedId
     MachineIdGroup idGroup; // 复合主键
-    @NotNull
+    @Nonnull
     String machine_name; // 设备名称
     String begin_time; // 开始日期
     String end_time; // 结束时间
-    @NotNull
+    @Nonnull
     char type; // 设备类型，1=GNSS、2=测斜仪、3=孔隙水压力计、4=应力桩、5=预留扩展测量设备
-    @NotNull
+    @Nonnull
     Double longitude; // 经度
-    @NotNull
+    @Nonnull
     Double latitude; // 纬度
-    @NotNull
+    @Nonnull
     Double elevation; // 起始海拔高程
     String in_time; // 入库时间
     String operate_time; // 操作时间
