@@ -12,6 +12,7 @@ import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.ManometerRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -86,7 +87,11 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
         if (manometerRecord == null) {
             return "设备id不存在";
         }
-        manometerRecordMapper.insertManometerRecord(manometerRecord);
+        try {
+            manometerRecordMapper.insertManometerRecord(manometerRecord);
+        } catch (DuplicateKeyException e) {
+            return "重复的孔隙水压力计设备记录";
+        }
         return manometerRecord.getIdGroup().getMachine_id();
     }
 

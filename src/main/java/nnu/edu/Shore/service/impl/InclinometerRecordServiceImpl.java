@@ -18,6 +18,7 @@ import nnu.edu.Shore.service.MachineService;
 import org.apache.tomcat.Jar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -97,7 +98,11 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
         if (inclinometerRecord == null) {
             return "设备id不存在";
         }
-        inclinometerRecordMapper.insertInclinometerRecord(inclinometerRecord);
+        try {
+            inclinometerRecordMapper.insertInclinometerRecord(inclinometerRecord);
+        } catch (DuplicateKeyException e) {
+            return "重复的测斜孔设备记录";
+        }
         return inclinometerRecord.getIdGroup().getMachine_id();
     }
 

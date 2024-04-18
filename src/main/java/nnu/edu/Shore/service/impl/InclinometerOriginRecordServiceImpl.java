@@ -11,6 +11,7 @@ import nnu.edu.Shore.service.InclinometerOriginRecordService;
 import nnu.edu.Shore.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -80,7 +81,11 @@ public class InclinometerOriginRecordServiceImpl implements InclinometerOriginRe
         if (inclinometerOriginRecord == null) {
             return "设备id不存在";
         }
-        inclinometerOriginRecordMapper.insertInclinometerOriginRecord(inclinometerOriginRecord);
+        try {
+            inclinometerOriginRecordMapper.insertInclinometerOriginRecord(inclinometerOriginRecord);
+        } catch (DuplicateKeyException e) {
+            return "重复的测斜仪设备记录";
+        }
         return inclinometerOriginRecord.getIdGroup().getMachine_id();
     }
 }

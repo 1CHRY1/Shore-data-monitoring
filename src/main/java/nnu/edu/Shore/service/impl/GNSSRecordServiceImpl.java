@@ -14,6 +14,7 @@ import nnu.edu.Shore.service.GNSSRecordService;
 import nnu.edu.Shore.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
@@ -98,7 +99,11 @@ public class GNSSRecordServiceImpl implements GNSSRecordService {
         if (gnssRecord == null) {
             return "设备id不存在";
         }
-        gnssRecordMapper.insertGNSSRecord(gnssRecord);
+        try {
+            gnssRecordMapper.insertGNSSRecord(gnssRecord);
+        } catch (DuplicateKeyException e) {
+            return "重复的gnss设备记录";
+        }
         return gnssRecord.getIdGroup().getMachine_id();
     }
 

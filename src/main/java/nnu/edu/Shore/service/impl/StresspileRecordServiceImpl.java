@@ -12,6 +12,7 @@ import nnu.edu.Shore.service.MachineService;
 import nnu.edu.Shore.service.StresspileRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -94,7 +95,11 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
         if (stresspileRecord == null) {
             return "设备id不存在";
         }
-        stresspileRecordMapper.insertStresspileRecord(stresspileRecord);
+        try {
+            stresspileRecordMapper.insertStresspileRecord(stresspileRecord);
+        } catch (DuplicateKeyException e) {
+            return "重复的应力桩设备记录";
+        }
         return stresspileRecord.getIdGroup().getMachine_id();
     }
 
