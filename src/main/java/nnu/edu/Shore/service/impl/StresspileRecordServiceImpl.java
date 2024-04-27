@@ -74,7 +74,7 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
                     .top_angle(jsonObject.getJSONObject("param_value").getDouble("top_angle"))
                     .middle_angle(jsonObject.getJSONObject("param_value").getDouble("middle_angle"))
                     .bottom_angle(jsonObject.getJSONObject("param_value").getDouble("bottom_angle"))
-                    .top_power(jsonObject.getJSONObject("param_value").getDouble("top_angle"))
+                    .top_power(jsonObject.getJSONObject("param_value").getDouble("top_power"))
                     .middle_power(jsonObject.getJSONObject("param_value").getDouble("middle_power"))
                     .bottom_power(jsonObject.getJSONObject("param_value").getDouble("bottom_power"))
                     .top_change(jsonObject.getJSONObject("param_value").getDouble("top_change"))

@@ -88,6 +88,11 @@ public class TimeTask {
                 if ( nameList.contains(name.substring(1))) {
                     JSONArray dataList = HistoryData.getJSONObject("Datas").getJSONArray("Datas");
                     Integer dataCount = HistoryData.getJSONObject("Datas").getInteger("DataCount");
+                    // 若请求的数据为空
+                    if (dataCount.equals(0)) {
+                        result.put(nameDict.get(name.substring(1)),null);
+                        continue;
+                    }
                     Double sum = 0.0;
                     for (Object dataObj : dataList) {
                         JSONObject data = (JSONObject) dataObj;
