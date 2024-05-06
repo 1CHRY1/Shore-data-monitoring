@@ -44,9 +44,8 @@ public class InclinometerOriginRecordServiceImpl implements InclinometerOriginRe
 
     @SneakyThrows
     private InclinometerOriginRecord dataProcess(JSONObject jsonObject) {
-        // 若是一个月的第一分钟，则新建表分区进行存储
+        // 获取数据时间
         Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
-        DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "inclinometer_o");
         // 测斜仪原始数据编号为5
         InclinometerOriginRecord inclinometerRecord;
         String machine_id = jsonObject.getString("device_id");

@@ -50,9 +50,8 @@ public class StresspileRecordServiceImpl implements StresspileRecordService {
 
     @SneakyThrows
     private StresspileRecord dataProcess(JSONObject jsonObject){
-        // 若是一个月的第一分钟，则新建表分区进行存储
+        // 获取数据时间
         Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
-        DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "stresspile");
         // 应力桩编号为2
         StresspileRecord stresspileRecord;
         String machine_id = jsonObject.getString("device_id");

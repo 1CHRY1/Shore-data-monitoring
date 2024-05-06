@@ -4,15 +4,18 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import nnu.edu.Shore.common.result.JsonResult;
+import nnu.edu.Shore.common.utils.DatabaseUtil;
 import nnu.edu.Shore.common.utils.RequestUtil;
 import nnu.edu.Shore.pojo.StresspileInfo;
 import nnu.edu.Shore.service.StresspileInfoService;
 import nnu.edu.Shore.service.StresspileRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -31,7 +34,28 @@ public class TimeTask {
     @Autowired
     StresspileRecordService stresspileRecordService;
 
-    @Scheduled(cron = "1 * * * * ?")
+    @Value("${spring.datasource.shore.jdbc-url}")
+    String URL;
+
+    @Value("${spring.datasource.shore.username}")
+    String USER;
+
+    @Value("${spring.datasource.shore.password}")
+    String PASSWORD;
+
+//    @Scheduled(cron = "0/1 * * * * ?")
+    @Scheduled(cron = "0 0 0 1 * ?")
+    public void CreateDBPartition() {
+        // 每月创建一次数据表分区
+        LocalDate MonthTime = LocalDate.now().withDayOfMonth(1);
+        List<String> tableNames = new ArrayList<>();
+        tableNames.add("gnss"); tableNames.add("manometer"); tableNames.add("inclinometer"); tableNames.add("inclinometer_o"); tableNames.add("stresspile");
+        for (String tableName : tableNames) {
+            DatabaseUtil.DBPartition(URL, USER, PASSWORD, MonthTime, tableName);
+        }
+
+    }
+//    @Scheduled(cron = "1 * * * * ?")
     public void getStresspileData() {
         // 定时推送应力桩数据给数据库
         String url = "http://119.45.198.54:8001/webapi/api";

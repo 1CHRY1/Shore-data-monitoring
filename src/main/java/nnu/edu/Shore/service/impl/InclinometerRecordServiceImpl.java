@@ -57,9 +57,8 @@ public class InclinometerRecordServiceImpl implements InclinometerRecordService 
 
     @SneakyThrows
     private InclinometerRecord dataProcess(JSONObject jsonObject){
-        // 若是一个月的第一分钟，则新建表分区进行存储
+        // 获取数据时间
         Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
-        DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "inclinometer");
         // 测斜仪编号为4
         InclinometerRecord inclinometerRecord;
         String machine_id = jsonObject.getString("device_id");

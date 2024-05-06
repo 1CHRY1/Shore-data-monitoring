@@ -48,9 +48,8 @@ public class ManometerRecordServiceImpl implements ManometerRecordService {
 
     @SneakyThrows
     private ManometerRecord dataProccess(JSONObject jsonObject){
-        // 若是一个月的第一分钟，则新建表分区进行存储
+        // 获取数据时间
         Timestamp measure_time = TimeUtil.String2Timestamp(jsonObject.getString("read_date"));
-        DatabaseUtil.DBPartition(URL, USER, PASSWORD, measure_time, "manometer");
         // 孔隙水压力计编号为3
         ManometerRecord manometerRecord;
         String machine_id = jsonObject.getString("device_id");
