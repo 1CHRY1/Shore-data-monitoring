@@ -55,7 +55,7 @@ public class TimeTask {
         }
 
     }
-//    @Scheduled(cron = "1 * * * * ?")
+    @Scheduled(cron = "0/1 * * * * ?")
     public void getStresspileData() {
         // 定时推送应力桩数据给数据库
         String url = "http://119.45.198.54:8001/webapi/api";

@@ -6,3 +6,4 @@ spring:
       username: postgres
       password: 123
 
+logpath: "D:/1study/Work/2024_1_10_bank/数据中台/log/app.log"
