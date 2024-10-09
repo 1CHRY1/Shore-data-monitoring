@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: bankDataMonitor
+  profiles:
+    active: prod
+
+server:
+  port: 9999

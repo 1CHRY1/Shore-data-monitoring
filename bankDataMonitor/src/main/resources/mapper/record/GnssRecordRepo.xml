@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.nari.bankdatamonitor.repository.record.GnssRecordRepo">
+    <resultMap id="GnssRecordMap" type="nnu.nari.bankdatamonitor.model.record.GnssRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="x_move" column="x_move"/>
+        <result property="y_move" column="y_move"/>
+        <result property="z_move" column="z_move"/>
+        <result property="threeD" column="threeD"/>
+        <result property="threeDF" column="threeDF"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <insert id="insertGnssRecord" parameterType="nnu.nari.bankdatamonitor.model.record.GnssRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO gnss_record (station_id, machine_id, machine_id_nnu, measure_time, x_move, y_move, z_move, threed, threedf, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{x_move}, #{y_move}, #{z_move}, #{threeD}, #{threeDF}, #{in_time})
+    </insert>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.nari.bankdatamonitor.repository.record.StresspileRecordRepo">
+    <resultMap id="stresspileRecordMap" type="nnu.nari.bankdatamonitor.model.record.StresspileRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="top_angle" column="top_angle"/>
+        <result property="middle_angle" column="middle_angle"/>
+        <result property="bottom_angle" column="bottom_angle"/>
+        <result property="top_power" column="top_power"/>
+        <result property="middle_power" column="middle_power"/>
+        <result property="bottom_power" column="bottom_power"/>
+        <result property="top_change" column="top_change"/>
+        <result property="middle_change" column="middle_change"/>
+        <result property="bottom_change" column="bottom_change"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <insert id="insertStresspileRecord" parameterType="nnu.nari.bankdatamonitor.model.record.StresspileRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO stresspile_record (station_id, machine_id, machine_id_nnu, measure_time, top_angle, middle_angle, bottom_angle,
+                                       top_power, middle_power, bottom_power, top_change, middle_change, bottom_change, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time},
+                #{top_angle}, #{middle_angle}, #{bottom_angle}, #{top_power}, #{middle_power}, #{bottom_power},
+                #{top_change}, #{middle_change}, #{bottom_change}, #{in_time})
+    </insert>
+</mapper>

@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    bank:
+      jdbc-url: jdbc:postgresql://localhost:5432/bank?stringtype=unspecified
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: nhri_admin123456
+
+stresspileServer:
+  url: "http://119.45.198.54:8001/webapi/api"
+  user: "admin"
+  password: "phmpassword"
+
+logpath: "E:/bankApplication/bank-data-monitoring/dmz.log"
