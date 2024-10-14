@@ -1,6 +1,7 @@
 package nnu.nari.bankdatamonitor.repository.record;
 
 import nnu.nari.bankdatamonitor.model.record.StresspileRecord;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StresspileRecordRepo {
 
-    void insertStresspileRecord(StresspileRecord stresspileRecord);
+    void insertStresspileRecord(StresspileRecord stresspileRecord) throws PSQLException;
 
 }

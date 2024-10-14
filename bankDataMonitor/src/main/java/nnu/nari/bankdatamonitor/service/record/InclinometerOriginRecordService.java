@@ -14,6 +14,7 @@ import nnu.nari.bankdatamonitor.repository.record.InclinometerOriginRecordRepo;
 import nnu.nari.bankdatamonitor.repository.record.InclinometerRecordRepo;
 import nnu.nari.bankdatamonitor.service.base.MonitorRecordService;
 import nnu.nari.bankdatamonitor.service.info.MachineService;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
@@ -49,7 +50,8 @@ public class InclinometerOriginRecordService extends MonitorRecordService<Inclin
         }
         try {
             inclinometerOriginRecordRepo.insertInclinometerOriginRecord(inclinometerOriginRecord);
-        } catch (DuplicateKeyException e) {
+        } catch (DuplicateKeyException | PSQLException e) {
+            log.info("重复的Inclinometer_o设备记录");
             return "重复的Inclinometer_o设备记录";
         }
         String sucStr = "Inclinometer_o 设备 "+inclinometerOriginRecord.getIdGroup().getMachine_id()+" 于 "+inclinometerOriginRecord.getIdGroup().getMeasure_time()+" 插入记录成功！";

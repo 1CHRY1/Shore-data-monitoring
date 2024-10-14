@@ -1,6 +1,7 @@
 package nnu.nari.bankdatamonitor.repository.record;
 
 import nnu.nari.bankdatamonitor.model.record.GnssRecord;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository("GnssRecordRepo")
 public interface GnssRecordRepo {
 
-    void insertGnssRecord(GnssRecord gnssRecord);
+    void insertGnssRecord(GnssRecord gnssRecord) throws PSQLException;
 
 }

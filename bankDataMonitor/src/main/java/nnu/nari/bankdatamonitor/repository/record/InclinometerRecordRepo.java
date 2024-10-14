@@ -1,6 +1,7 @@
 package nnu.nari.bankdatamonitor.repository.record;
 
 import nnu.nari.bankdatamonitor.model.record.InclinometerRecord;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InclinometerRecordRepo {
 
-    void insertInclinometerRecord(InclinometerRecord inclinometerRecord);
+    void insertInclinometerRecord(InclinometerRecord inclinometerRecord) throws PSQLException;
 
 }

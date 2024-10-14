@@ -14,6 +14,7 @@ import nnu.nari.bankdatamonitor.model.record.ManometerRecord;
 import nnu.nari.bankdatamonitor.repository.record.ManometerRecordRepo;
 import nnu.nari.bankdatamonitor.service.base.MonitorRecordService;
 import nnu.nari.bankdatamonitor.service.info.MachineService;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
@@ -50,7 +51,8 @@ public class ManometerRecordService extends MonitorRecordService<ManometerRecord
         }
         try {
             manometerRecordRepo.insertManometerRecord(manometerRecord);
-        } catch (DuplicateKeyException e) {
+        } catch (DuplicateKeyException | PSQLException e) {
+            log.info("重复的Manometer设备记录");
             return "重复的Manometer设备记录";
         }
         String sucStr = "Manometer设备 "+manometerRecord.getIdGroup().getMachine_id()+" 于 "+manometerRecord.getIdGroup().getMeasure_time()+" 插入记录成功！";

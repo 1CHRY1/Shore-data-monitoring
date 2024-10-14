@@ -13,6 +13,7 @@ import nnu.nari.bankdatamonitor.model.record.StresspileRecord;
 import nnu.nari.bankdatamonitor.repository.record.StresspileRecordRepo;
 import nnu.nari.bankdatamonitor.service.base.MonitorRecordService;
 import nnu.nari.bankdatamonitor.service.info.MachineService;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
@@ -49,7 +50,8 @@ public class StresspileRecordService extends MonitorRecordService<StresspileReco
         }
         try {
             stresspileRecordRepo.insertStresspileRecord(stresspileRecord);
-        } catch (DuplicateKeyException e) {
+        } catch (DuplicateKeyException | PSQLException e) {
+            log.info("重复的Stresspile设备记录");
             return "重复的Stresspile设备记录";
         }
         String sucStr = "Stresspile设备 " + stresspileRecord.getIdGroup().getMachine_id() + " 于 " + stresspileRecord.getIdGroup().getMeasure_time() + " 插入记录成功！";

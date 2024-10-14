@@ -15,10 +15,12 @@ import nnu.nari.bankdatamonitor.model.record.GnssRecord;
 import nnu.nari.bankdatamonitor.repository.record.GnssRecordRepo;
 import nnu.nari.bankdatamonitor.service.base.MonitorRecordService;
 import nnu.nari.bankdatamonitor.service.info.MachineService;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -47,12 +49,13 @@ public class GnssRecordService extends MonitorRecordService<GnssRecord> {
         if (gnssRecord == null) {
             return "Gnss设备id不存在";
         }
-        if (gnssRecord.getIdGroup()==null) {
+        if (gnssRecord.getIdGroup() == null) {
             return "GnssRecord设备记录推送格式不正确";
         }
         try {
             gnssRecordRepo.insertGnssRecord(gnssRecord);
-        } catch (DuplicateKeyException e) {
+        } catch (DuplicateKeyException | PSQLException e) {
+            log.info("重复的Gnss设备记录");
             return "重复的Gnss设备记录";
         }
         String sucStr = "Gnss设备 "+gnssRecord.getIdGroup().getMachine_id()+" 于 "+gnssRecord.getIdGroup().getMeasure_time()+" 插入记录成功！";
