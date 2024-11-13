@@ -1,7 +1,7 @@
 spring:
   datasource:
     shore:
-      jdbc-url: jdbc:postgresql://localhost:5432/shore_test?stringtype=unspecified
+      jdbc-url: jdbc:postgresql://localhost:5432/bank_test?stringtype=unspecified
       driver-class-name: org.postgresql.Driver
       username: postgres
       password: 123

@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(builderMethodName = "MonitorRecordBuilder")
+@ToString(callSuper = true)
 public class MonitorRecord {
     @EmbeddedId
     MonitorRecordIdGroup idGroup;

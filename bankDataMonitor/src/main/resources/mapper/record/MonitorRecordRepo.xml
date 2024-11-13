@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nnu.nari.bankdatamonitor.repository.record.MonitorRecordRepo">
+    <resultMap id="GnssRecordMap" type="nnu.nari.bankdatamonitor.model.record.GnssRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="x_move" column="x_move"/>
+        <result property="y_move" column="y_move"/>
+        <result property="z_move" column="z_move"/>
+        <result property="threeD" column="threeD"/>
+        <result property="threeDF" column="threeDF"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <resultMap id="InclinometerOriginRecordMap" type="nnu.nari.bankdatamonitor.model.record.InclinometerOriginRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="angle" column="angle"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <resultMap id="InclinometerRecordMap" type="nnu.nari.bankdatamonitor.model.record.InclinometerRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="top_move" column="top_move"/>
+        <result property="middle_move" column="middle_move"/>
+        <result property="bottom_move" column="bottom_move"/>
+        <result property="top_move_24h" column="top_move_24h"/>
+        <result property="middle_move_24h" column="middle_move_24h"/>
+        <result property="bottom_move_24h" column="bottom_move_24h"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <resultMap id="ManometerRecordMap" type="nnu.nari.bankdatamonitor.model.record.ManometerRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="zx" column="zx"/>
+        <result property="wd" column="wd"/>
+        <result property="swgc" column="swgc"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <resultMap id="StresspileRecordMap" type="nnu.nari.bankdatamonitor.model.record.StresspileRecord">
+        <id property="idGroup.station_id" column="station_id"/>
+        <id property="idGroup.machine_id" column="machine_id"/>
+        <id property="idGroup.machine_id_nnu" column="machine_id_nnu"/>
+        <id property="idGroup.measure_time" column="measure_time"/>
+        <result property="top_angle" column="top_angle"/>
+        <result property="middle_angle" column="middle_angle"/>
+        <result property="bottom_angle" column="bottom_angle"/>
+        <result property="top_power" column="top_power"/>
+        <result property="middle_power" column="middle_power"/>
+        <result property="bottom_power" column="bottom_power"/>
+        <result property="top_change" column="top_change"/>
+        <result property="middle_change" column="middle_change"/>
+        <result property="bottom_change" column="bottom_change"/>
+        <result property="in_time" column="in_time"/>
+    </resultMap>
+    <insert id="insertGnssRecord" parameterType="nnu.nari.bankdatamonitor.model.record.GnssRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO gnss_record (station_id, machine_id, machine_id_nnu, measure_time, x_move, y_move, z_move, threed, threedf, in_time)
+            VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time},
+                    #{x_move}, #{y_move}, #{z_move}, #{threeD}, #{threeDF}, #{in_time})
+    </insert>
+    <insert id="insertInclinometerRecord" parameterType="nnu.nari.bankdatamonitor.model.record.InclinometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO inclinometer_record (station_id, machine_id, machine_id_nnu, measure_time, top_move, middle_move, bottom_move, top_move_24h,
+                                         middle_move_24h, bottom_move_24h, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{top_move}, #{middle_move}, #{bottom_move},
+                #{top_move_24h}, #{middle_move_24h}, #{bottom_move_24h}, #{in_time})
+    </insert>
+    <insert id="insertManometerRecord" parameterType="nnu.nari.bankdatamonitor.model.record.ManometerRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO manometer_record (station_id, machine_id, machine_id_nnu, measure_time, zx, wd, swgc, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{zx},
+                #{wd}, #{swgc}, #{in_time})
+    </insert>
+    <insert id="insertStresspileRecord" parameterType="nnu.nari.bankdatamonitor.model.record.StresspileRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO stresspile_record (station_id, machine_id, machine_id_nnu, measure_time, top_angle, middle_angle, bottom_angle,
+                                       top_power, middle_power, bottom_power, top_change, middle_change, bottom_change, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time},
+                #{top_angle}, #{middle_angle}, #{bottom_angle}, #{top_power}, #{middle_power}, #{bottom_power},
+                #{top_change}, #{middle_change}, #{bottom_change}, #{in_time})
+    </insert>
+    <insert id="insertInclinometerOriginRecord" parameterType="nnu.nari.bankdatamonitor.model.record.InclinometerOriginRecord" useGeneratedKeys="true" keyProperty="idGroup">
+        INSERT INTO inclinometer_o_record (station_id, machine_id, machine_id_nnu, measure_time, angle, in_time)
+        VALUES (#{idGroup.station_id}, #{idGroup.machine_id}, #{idGroup.machine_id_nnu}, #{idGroup.measure_time}, #{angle}, #{in_time})
+    </insert>
+
+    <select id="getGnssRecord" resultMap="GnssRecordMap">
+        select * from gnss_record where in_time between #{startTime} and #{endTime}
+    </select>
+    <select id="getGnssRecordByLimit" resultMap="GnssRecordMap">
+        select * from gnss_record where in_time > #{startTime} order by measure_time limit #{limit}
+    </select>
+    <select id="getInclinometerRecord" resultMap="InclinometerRecordMap">
+        select * from inclinometer_record where in_time between #{startTime} and #{endTime}
+    </select>
+    <select id="getInclinometerRecordByLimit" resultMap="InclinometerRecordMap">
+        select * from inclinometer_record where in_time > #{startTime} order by measure_time limit #{limit}
+    </select>
+    <select id="getManometerRecord" resultMap="ManometerRecordMap">
+        select * from manometer_record where in_time between #{startTime} and #{endTime}
+    </select>
+    <select id="getManometerRecordByLimit" resultMap="ManometerRecordMap">
+        select * from manometer_record where in_time > #{startTime} order by measure_time limit #{limit}
+    </select>
+    <select id="getStresspileRecord" resultMap="StresspileRecordMap">
+        select * from stresspile_record where in_time between #{startTime} and #{endTime}
+    </select>
+    <select id="getStresspileRecordByLimit" resultMap="StresspileRecordMap">
+        select * from stresspile_record where in_time > #{startTime} order by measure_time limit #{limit}
+    </select>
+    <select id="getInclinometerOriginRecord" resultMap="InclinometerOriginRecordMap">
+        select * from inclinometer_o_record where in_time between #{startTime} and #{endTime}
+    </select>
+    <select id="getInclinometerOriginRecordByLimit" resultMap="InclinometerOriginRecordMap">
+        select * from inclinometer_o_record where in_time > #{startTime} order by measure_time limit #{limit}
+    </select>
+</mapper>

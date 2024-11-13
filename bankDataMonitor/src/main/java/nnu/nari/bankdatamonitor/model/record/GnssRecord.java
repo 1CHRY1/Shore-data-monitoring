@@ -15,10 +15,9 @@ import java.sql.Timestamp;
  * @Description:
  */
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class GnssRecord extends MonitorRecord {
 
     @Nonnull

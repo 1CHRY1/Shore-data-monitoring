@@ -14,10 +14,9 @@ import java.sql.Timestamp;
  * @Description:
  */
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class InclinometerOriginRecord extends MonitorRecord {
     Double angle; // 角度
     @Builder(builderMethodName = "InclinometerOriginRecordBuilder")

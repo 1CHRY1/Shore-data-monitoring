@@ -14,10 +14,9 @@ import java.sql.Timestamp;
  * @Description:
  */
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class InclinometerRecord extends MonitorRecord {
 
     Double top_move; // 顶部累计位移

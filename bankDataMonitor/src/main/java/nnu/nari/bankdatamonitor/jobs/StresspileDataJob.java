@@ -5,12 +5,10 @@ import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import nnu.nari.bankdatamonitor.common.utils.BeanUtil;
 import nnu.nari.bankdatamonitor.common.utils.InternetUtil;
-import nnu.nari.bankdatamonitor.service.record.StresspileRecordService;
+import nnu.nari.bankdatamonitor.service.record.MonitorRecordService;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -42,7 +40,7 @@ public class StresspileDataJob implements Job {
     }
 
     public void getStresspileData(String url, String user, String password) {
-        StresspileRecordService stresspileRecordService = BeanUtil.getBean(StresspileRecordService.class);
+        var monitorRecordService = BeanUtil.getBean(MonitorRecordService.class);
         // 定时推送应力桩数据给数据库
         // 登陆
         String loginUrl = url + "/Login/Login";
@@ -118,7 +116,7 @@ public class StresspileDataJob implements Job {
             // JSONObject response = RequestUtil.doPost(dataUrl, CommonHeader, requestData);
 
             // 直接插入数据库
-            stresspileRecordService.insertMonitorRecord(insertData);
+            monitorRecordService.insertMonitorRecord("stresspile",insertData);
         }
     }
 }

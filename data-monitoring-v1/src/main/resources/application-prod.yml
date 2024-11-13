@@ -4,6 +4,6 @@ spring:
       jdbc-url: jdbc:postgresql://localhost:5432/bank?stringtype=unspecified
       driver-class-name: org.postgresql.Driver
       username: postgres
-      password: nhri_admin123456
+      password: 2001092000
 
 logpath: "E:/bankApplication/bank-data-monitoring/dmz.log"

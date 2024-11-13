@@ -1,7 +1,8 @@
-package nnu.nari.bankdatamonitor.service.base;
+package nnu.nari.bankdatamonitor.service.info;
 
 import com.alibaba.fastjson2.JSONObject;
 import nnu.nari.bankdatamonitor.model.base.MonitorInfo;
+import nnu.nari.bankdatamonitor.service.base.IMonitorInfoService;
 import org.springframework.stereotype.Service;
 
 /**

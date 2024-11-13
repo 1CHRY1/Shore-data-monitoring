@@ -7,7 +7,6 @@ import nnu.nari.bankdatamonitor.common.utils.TimeUtil;
 import nnu.nari.bankdatamonitor.model.base.MonitorInfoIdGroup;
 import nnu.nari.bankdatamonitor.model.info.Machine;
 import nnu.nari.bankdatamonitor.repository.info.MachineInfoRepo;
-import nnu.nari.bankdatamonitor.service.base.MonitorInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

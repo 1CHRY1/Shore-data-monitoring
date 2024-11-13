@@ -50,7 +50,7 @@ public class QuartzSchedulerManager {
     // 开始执行定时器
     public void startJob() throws SchedulerException {
         log.info("start job here");
-        startStresspileDataJob();
+//        startStresspileDataJob();
         startCreateDBPartitionJob();
         scheduler.start();
     }

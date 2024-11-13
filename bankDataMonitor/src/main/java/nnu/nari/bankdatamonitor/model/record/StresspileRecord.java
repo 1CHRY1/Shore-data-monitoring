@@ -14,10 +14,9 @@ import java.sql.Timestamp;
  * @Description:
  */
 
-@Setter
-@Getter
+@Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class StresspileRecord extends MonitorRecord {
 
     Double top_angle; // 上夹角
